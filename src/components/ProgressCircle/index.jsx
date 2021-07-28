@@ -7,7 +7,11 @@ import useCountDown from "react-countdown-hook";
 import { useEffect } from "react";
 import CheckIcon from "@material-ui/icons/Check";
 
-const ProgressCircle = ({ size = 150,fontSize=32,maxValue,value }) => {
+const ProgressCircle = ({ size = 150, fontSize = 32, maxValue, value }) => {
+  
+  useEffect(() => {
+    
+  }, [value]);
  
   return (
       <Centered>
@@ -22,37 +26,25 @@ const ProgressCircle = ({ size = 150,fontSize=32,maxValue,value }) => {
               style={{ color: "grey" }}
             />
           </div>
-          {/* <div
+          <div
             style={{ position: "absolute", left: 0, top: 0, color: "grey" }}
           >
-            {timeLeft > 60000 ? (
               <CircularProgress
                 variant="determinate"
                 value={
-                  timeLeft === 0
-                    ? 100
-                    : Math.round((timeLeft / p100local) * 100) + 1
+                  value === 0
+                    ? 0
+                    : Math.round((value / maxValue) * 100) + 1
                 }
                 size={size+2}
-                aria-describedby="timer"
+                aria-describedby="progress-val"
                 thickness={2}
-            />
-            ) : (
-              <CircularProgress
-                variant={timeLeft === 0 ? 'indeterminate' : "determinate"}
-                value={
-                  timeLeft === 0
-                    ? 100
-                    : Math.round((secondsLeft / 60) * 100) + 1
+                style={//value > 0 ? { color: "red" } : 
+                  { color: "green" }
                 }
-                size={size+2}
-                aria-describedby="timer"
-                thickness={2}
-                style={timeLeft > 0 ? { color: "red" } : { color: "green" }}
               />
-            )}
-          </div> */}
-          {/* {timeLeft > 0 ? (
+          </div>
+          {value === maxValue ? (
             <div
               style={{
                 position: "absolute",
@@ -70,22 +62,12 @@ const ProgressCircle = ({ size = 150,fontSize=32,maxValue,value }) => {
               justifyContent: "center",
               alignItems: 'center',
             }}>
-            {hoursLeft > 0 && (<>
-              <Typography variant="h4" style={{ fontSize:fontSize }}>{hoursLeft}</Typography>
-              <Typography variant="h4" style={{ padding: "0px 2px", fontSize:fontSize }}>
-                :
-              </Typography>
-            </>)}
               <Typography variant="h4" style={{ fontSize:fontSize }}>
-                {minutesLeft < 10 && "0"}
-                {minutesLeft}
-              </Typography>
-              <Typography variant="h4" style={{ padding: "0px 2px", fontSize:fontSize }}>
-                :
-              </Typography>
-              <Typography variant="h4" style={{ fontSize:fontSize }}>
-                {secondsLeft < 10 && "0"}
-                {secondsLeft}
+                {
+                  value === 0
+                    ? 0
+                    : Math.round((value / maxValue) * 100) + 1
+                } %
               </Typography>
               </div>
             </div>
@@ -104,7 +86,7 @@ const ProgressCircle = ({ size = 150,fontSize=32,maxValue,value }) => {
             >
               <CheckIcon fontSize="inherit" />
             </div>
-          )} */}
+          )}
         </div>
       </Centered>
   );
