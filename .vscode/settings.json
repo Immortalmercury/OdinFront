@@ -1,0 +1,21 @@
+{
+    "files.exclude": {
+        ".eslintcache": true,
+        ".gitignore": true,
+        "README.md": true,
+        "LICENSE.txt": true,
+        "yarn.lock": true,
+        "changelog.md": true,
+        "src/serviceWorker.js": true,
+        ".prettierrc": true,
+        "src/themes": true,
+        ".idea": true,
+        "docs": true,
+        ".vscode": true,
+        "node_modules": true,
+        "public": true,
+        "package-lock.json": true,
+        "src/.idea": true
+    },
+    "workspace.isHidden": true
+}
