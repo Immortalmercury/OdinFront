@@ -17,6 +17,7 @@ import { Typography } from "../../../components/Wrappers/Wrappers";
 import API from "../../../services/API";
 import LoadingPage from '../../../components/Loading';
 import Section from '../../../components/Section/index';
+import ProgressCircle from './../../../components/ProgressCircle/index';
 
 
 
@@ -57,28 +58,28 @@ export default function CoursesList(props) {
                   props.history.push('/student/courses/'+item.id_course)
                 }}>
                       <CardContent style={{width:'100%'}} className={classes.CardContent}>
-                        <div>
+                        <div style={{width:'100%',paddingRight:15}}>
                           <Typography color="textSecondary" variant="h6">
                             {item.name}
                           </Typography>
-                          <Divider style={{ marginBottom: 20 }} />
-                        </div>
-                        {/* <div>
-                          <Typography className={classes.pos} color="textSecondary" >
-                            Преподаватели
-                          </Typography>
-                          <Typography variant="caption"  color="textSecondary" component="p" >
-                            {item.teachers.map(teacher => teacher.s_name+' '+teacher.s_name[0]+'.'+(teacher.fth_name!==null? teacher.fth_name[0]+'. ':' ')+' ')}
-                          </Typography>
-                        </div> */}
-                      </CardContent>
-                      <CardActions >
-                        <Button color="primary" size="small" component={'div'} onClick={() => {
+                      <Divider style={{ marginBottom: 20 }} />
+                      <Button color="primary" size="small" className={classes.CardButton} fullWidth
+                        component={'div'} onClick={() => {
                           props.history.push('/student/courses/'+item.id_course)
                         }}>
                               Перейти 
                         </Button>
-                  </CardActions>
+                        </div>
+                        <div>
+
+                        <ProgressCircle
+                            size={80}
+                            maxValue={100}
+                            value={item.progress}
+                            fontSize={22}
+                            />
+                        </div>
+                  </CardContent>
                   </CardActionArea>
                   
               </Card>

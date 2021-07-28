@@ -16,8 +16,11 @@ export default makeStyles(theme => ({
   CardContent: {
     height: "100%",
     display: 'flex',
-    flexDirection: 'column',
+    // flexDirection: 'column',
     justifyContent: 'space-between',
+  },
+  CardButton: {
+    margin: 'auto',
   },
   visitsNumberContainer: {
     display: "flex",

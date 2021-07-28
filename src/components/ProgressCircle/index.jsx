@@ -15,7 +15,7 @@ const ProgressCircle = ({ size = 150, fontSize = 32, maxValue, value }) => {
  
   return (
       <Centered>
-        <div style={{ position: "relative", width: size, height: size+15 }}>
+        <div style={{ position: "relative", width: size+2, height: size+5 }}>
           <div style={{ position: "absolute", left: 1, top: 1 }}>
             <CircularProgress
               variant="determinate"
@@ -34,7 +34,7 @@ const ProgressCircle = ({ size = 150, fontSize = 32, maxValue, value }) => {
                 value={
                   value === 0
                     ? 0
-                    : Math.round((value / maxValue) * 100) + 1
+                    : Math.round((value / maxValue) * 100) 
                 }
                 size={size+2}
                 aria-describedby="progress-val"
@@ -44,7 +44,7 @@ const ProgressCircle = ({ size = 150, fontSize = 32, maxValue, value }) => {
                 }
               />
           </div>
-          {value === maxValue ? (
+          {value !== maxValue ? (
             <div
               style={{
                 position: "absolute",
@@ -66,8 +66,8 @@ const ProgressCircle = ({ size = 150, fontSize = 32, maxValue, value }) => {
                 {
                   value === 0
                     ? 0
-                    : Math.round((value / maxValue) * 100) + 1
-                } %
+                    : Math.round((value / maxValue) * 100)
+                }%
               </Typography>
               </div>
             </div>
