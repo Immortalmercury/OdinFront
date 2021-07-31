@@ -6,6 +6,7 @@ import { Typography } from "@material-ui/core";
 import Centered from "../Centered";
 import ClosedSection from "../ClosedSection";
 import API from "../../services/API";
+import { Button } from '@material-ui/core';
 
 const Section = ({
   children,
@@ -107,7 +108,18 @@ const Section = ({
             position: "relative",
           }}
         >
-          <Centered>{error}</Centered>
+            <Centered>
+              {error}
+              <Button
+                color="primary"
+                variant="outlined"
+                size="large"
+                onClick={() => {
+                  getData(true);
+                }}
+                style={{marginTop:20}}
+              >Повторить запрос</Button>
+            </Centered>
         </Paper>
       ) : opened ? (
         children

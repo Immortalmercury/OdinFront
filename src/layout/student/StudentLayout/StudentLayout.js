@@ -10,7 +10,8 @@ import Semester from '../../../pages/student/semester/Semester';
 import DisciplineLayout from '../discipline/DisciplineLayout';
 import LabsTimeline from '../../../pages/student/LabsTimeline/index';
 import Sidebar from "./Sidebar/Sidebar";
-import CoursesList from '../../../pages/student/courses/CoursesList';
+import CoursesList from '../../../pages/student/CoursesList/CoursesList';
+import CoursesPage from './../../../pages/student/CoursePage/CoursesPage';
 
 function StudentLayout(props) {
   var classes = useStyles();
@@ -29,6 +30,10 @@ function StudentLayout(props) {
           <Route path="/student/semester/:semester_num/discipline/:id_discipline/:tab" component={DisciplineLayout} />
 
           <Route exact path="/student/courses/" component={CoursesList} />
+          <Route exact path="/student/courses/:course_id" component={CoursesPage} />
+          <Route exact path="/student/courses/:course_id/discipline/:id_discipline"
+              render={(props) => <Redirect to={'./' + props.match.params.id_discipline + "/labs"} />} />
+          <Route path="/student/courses/:course_id/discipline/:id_discipline/:tab" component={DisciplineLayout} />
         </Switch>
       </div>
       <ProfileRightBar />

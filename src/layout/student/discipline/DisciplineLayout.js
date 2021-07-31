@@ -20,6 +20,7 @@ import DisciplineDifferentialCredit from '../../../pages/student/DisciplineDiffe
 import DisciplineResources from '../../../pages/student/DisciplineResources/index';
 import DisciplineAbout from '../../../pages/student/DisciplineAbout/index';
 import { Paper } from '@material-ui/core';
+import DisciplineEduProgram from './../../../pages/student/DisciplineEduProgram/index';
 
 
 function TabPanel(props) {
@@ -93,7 +94,8 @@ export default function DisciplineLayout(props) {
               scrollButtons="auto"
               aria-label="scrollable auto tabs example"
             >
-              <Tab value={'labs'} label="Лабораторные" {...tabProps(0)} />
+              <Tab value={'edu'} label="Программа обучения" {...tabProps(7)} />
+              {/* <Tab value={'labs'} label="Лабораторные" {...tabProps(0)} />
               {discipline.exam_forms.indexOf("Курсовая работа") !== -1 && 
               <Tab value={'course'} label="Курсовая работа" {...tabProps(1)} />}
               {discipline.exam_forms.indexOf("Экзамен")         !== -1 && 
@@ -101,12 +103,13 @@ export default function DisciplineLayout(props) {
               {discipline.exam_forms.indexOf("Зачет")           !== -1 && 
               <Tab value={'credit'} label="Зачет" {...tabProps(3)} />}
               {discipline.exam_forms.indexOf("Диф. зачет")      !== -1 && 
-              <Tab value={'differentialCredit'} label="Диф. зачет" {...tabProps(4)} />}
+              <Tab value={'differentialCredit'} label="Диф. зачет" {...tabProps(4)} />} */}
               <Tab value={'resources'} label="Ресурсы" {...tabProps(5)} />
               <Tab value={'about'} label="Преподаватели" {...tabProps(6)} />
             </Tabs>
           </AppBar>
         </Paper>
+        <TabPanel value={tab} index={'edu'}>        <DisciplineEduProgram setTab={setTab} {...props}/></TabPanel>
         <TabPanel value={tab} index={'labs'}>               <DisciplineLabs setTab={setTab} {...props}/></TabPanel>
         {discipline.exam_forms.indexOf("Курсовая работа") !== -1 &&   
         <TabPanel value={tab} index={'course'}>             <DisciplineCourse setTab={setTab} {...props} /></TabPanel>}

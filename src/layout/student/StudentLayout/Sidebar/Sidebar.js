@@ -124,7 +124,7 @@ function Sidebar({ location, history }) {
         makeMenu(result.data.menu);
       }
       setLoading(false);
-      getNotifications();
+      // getNotifications();
     });
   };
 
@@ -139,101 +139,101 @@ function Sidebar({ location, history }) {
   const timer = React.useRef();
 
   // ! Включает(true)/Выключает(false) получение новых уведомлений
-  const [timerRuns, setTimerRuns] = useState(false);
-  const [notifications, setNotifications] = useState(null);
+  // const [timerRuns, setTimerRuns] = useState(false);
+  // const [notifications, setNotifications] = useState(null);
 
-  const appendNotification = (newValues) => {
-    let newData = newValues;
-    Object.entries(notifications).map((e) => {
-      newData.push(e[1]);
-    });
-    setNotifications(newData);
-  };
+  // const appendNotification = (newValues) => {
+  //   let newData = newValues;
+  //   Object.entries(notifications).map((e) => {
+  //     newData.push(e[1]);
+  //   });
+  //   setNotifications(newData);
+  // };
 
-  function handleNotificationCall(text) {
-    var componentProps = {
-      type: "feedback",
-      message: text,
-      variant: "contained",
-      color: "primary",
-    };
-    sendNotification(componentProps, {
-      type: "info",
-      position: toast.POSITION.TOP_RIGHT,
-      progressClassName: classes.progress,
-      className: classes.notification,
-      autoClose: 5000,
-      hideProgressBar: true,
-      bodyClassName: classes.notificationBody,
-    });
-  }
+  // function handleNotificationCall(text) {
+  //   var componentProps = {
+  //     type: "feedback",
+  //     message: text,
+  //     variant: "contained",
+  //     color: "primary",
+  //   };
+  //   sendNotification(componentProps, {
+  //     type: "info",
+  //     position: toast.POSITION.TOP_RIGHT,
+  //     progressClassName: classes.progress,
+  //     className: classes.notification,
+  //     autoClose: 5000,
+  //     hideProgressBar: true,
+  //     bodyClassName: classes.notificationBody,
+  //   });
+  // }
 
-  const getNotifications = async () => {
-    await API.call({
-      method: "get_user_notifications",
-    }).then((result) => {
-      if (result.success) {
-        setNotifications(result.data);
-      }
-      setTimerRuns(false);
-    });
-  };
-  const updateNotifications = () => {
-    timer.current = window.setTimeout(async () => {
-      await API.call({
-        method: "get_new_user_notifications",
-      }).then((result) => {
-        if (result.success) {
-          if (result.data.length > 0) {
-            console.log("received Notifications: " + result.data.length);
+  // const getNotifications = async () => {
+  //   await API.call({
+  //     method: "get_user_notifications",
+  //   }).then((result) => {
+  //     if (result.success) {
+  //       setNotifications(result.data);
+  //     }
+  //     setTimerRuns(false);
+  //   });
+  // };
+  // const updateNotifications = () => {
+  //   timer.current = window.setTimeout(async () => {
+  //     await API.call({
+  //       method: "get_new_user_notifications",
+  //     }).then((result) => {
+  //       if (result.success) {
+  //         if (result.data.length > 0) {
+  //           console.log("received Notifications: " + result.data.length);
 
-            result.data.map((el) => {
-              handleNotificationCall(el.text);
-            });
-            appendNotification(result.data);
-          } else {
-            // console.log("No new Notifications, updateTime: "+new Date().toLocaleString());
-          }
-        }
-      });
-      setTimerRuns(true);
-    }, 10000);
-  };
+  //           result.data.map((el) => {
+  //             handleNotificationCall(el.text);
+  //           });
+  //           appendNotification(result.data);
+  //         } else {
+  //           // console.log("No new Notifications, updateTime: "+new Date().toLocaleString());
+  //         }
+  //       }
+  //     });
+  //     setTimerRuns(true);
+  //   }, 10000);
+  // };
 
-  useEffect(() => {
-    if (!timerRuns) {
-      updateNotifications();
-    }
-    return () => {
-      clearTimeout(timer.current);
-      setTimerRuns(false);
-    };
-  }, [timerRuns]);
+  // useEffect(() => {
+  //   if (!timerRuns) {
+  //     updateNotifications();
+  //   }
+  //   return () => {
+  //     clearTimeout(timer.current);
+  //     setTimerRuns(false);
+  //   };
+  // }, [timerRuns]);
 
-  function sendNotification(componentProps, options) {
-    return toast(
-      <Notification
-        {...componentProps}
-        className={classes.notificationComponent}
-      />,
-      options,
-    );
-  }
+  // function sendNotification(componentProps, options) {
+  //   return toast(
+  //     <Notification
+  //       {...componentProps}
+  //       className={classes.notificationComponent}
+  //     />,
+  //     options,
+  //   );
+  // }
 
-  function CloseButton({ closeToast, className }) {
-    return <CloseIcon className={className} onClick={closeToast} />;
-  }
+  // function CloseButton({ closeToast, className }) {
+  //   return <CloseIcon className={className} onClick={closeToast} />;
+  // }
 
   return (
     <>
-      <ToastContainer
+      {/* <ToastContainer
         className={classes.toastsContainer}
         closeButton={
           <CloseButton className={classes.notificationCloseButton} />
         }
         closeOnClick={false}
         progressClassName={classes.notificationProgress}
-      />
+      /> */}
       <Card
         style={{
           width: "240px",
@@ -333,12 +333,12 @@ function Sidebar({ location, history }) {
                   />
                 </IconButton>
                 <IconButton
-                  // disabled
-                  onClick={() =>
-                    handleNotificationCall(
-                      'Работа "Лабораторная работа 4" по предмету "Новые информационные технологии" была проверена. Проверил: Зууфина Валентина Максимовна. Оценка: 5',
-                    )
-                  }
+                  disabled
+                  // onClick={() =>
+                  //   handleNotificationCall(
+                  //     'Работа "Лабораторная работа 4" по предмету "Новые информационные технологии" была проверена. Проверил: Зууфина Валентина Максимовна. Оценка: 5',
+                  //   )
+                  // }
                   color="primary"
                   className={classes.profile_btn}
                 >

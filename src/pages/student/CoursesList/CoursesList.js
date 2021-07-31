@@ -17,7 +17,7 @@ import { Typography } from "../../../components/Wrappers/Wrappers";
 import API from "../../../services/API";
 import LoadingPage from '../../../components/Loading';
 import Section from '../../../components/Section/index';
-import ProgressCircle from './../../../components/ProgressCircle/index';
+import ProgressCircle from '../../../components/ProgressCircle/index';
 
 
 
