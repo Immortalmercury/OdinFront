@@ -16,6 +16,7 @@ const Section = ({
   setUpdate = null,
   timerDecoration = null,
   debug = false,
+  noDataAllowed = false,
 }) => {
   const [pageOpenedAt] = useState(new Date());
   const [opened, setOpened] = useState(null);
@@ -36,6 +37,9 @@ const Section = ({
           } else {
             setOpened(true);
           }
+        } else if (noDataAllowed) {
+          setData(result.data);
+          setOpened(true);
         } else {
           setError(
             <>

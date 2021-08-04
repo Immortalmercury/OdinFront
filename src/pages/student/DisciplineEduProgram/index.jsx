@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Badge } from "@material-ui/core";
+import { Badge, Paper, Typography } from "@material-ui/core";
 import UploadFileButton from "../../../components/Buttons/UploadFileButton";
 import DownloadFileButton from "../../../components/Buttons/DownloadFileButton";
 import Section from "../../../components/Section";
@@ -8,6 +8,9 @@ import DateToRusTime from "../../../components/DateToRusTime/index";
 import SecondsToRusTime from "../../../components/SecondsToRusTime";
 import classnames from "classnames";
 import useStyles from "./styles";
+import { Tooltip } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import ForwardIcon from '@material-ui/icons/Forward';
 
 const Statuses = "Проверка,Оценено,Повторная проверка".split(",");
 
@@ -44,6 +47,52 @@ export default function DisciplineEduProgram(props) {
           discipline: props.match.params.id_discipline,
         }}
       >
+        {data && data.map((item) => {
+          return (
+            <Paper elevation={3} className={classes.paper}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: 'space-between', }}>
+                <div style={{ display: "flex", alignItems: 'flex-start', flexDirection: 'column', paddingBottom: 5 }}>
+              
+                  <Typography variant="h6" component="h1" className={classes.date}>
+                    {item.edu_item.name}
+                  </Typography>
+                  <Typography style={{ paddingLeft: 5 }}>{item.description}</Typography>
+                  {item.comment &&
+                    <Typography style={{ paddingLeft: 5 }}>Комментарий: {item.comment}</Typography>
+                  }
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <DownloadFileButton
+                    buttonType="IconButton"
+                    color="primary"
+                    filename={data.file}
+                    data={{
+                      method: "get_lab_file",
+                      file: data.file,
+                      lab: data.id_lab,
+                    }}
+                    label="Скачать задание"
+                  />
+                  <UploadFileButton
+                    className={classes.greenText}
+                    buttonType="IconButton"
+                    color="primary"
+                    label="Отправить ответ"
+                    data={{
+                      method: 'upload_user_answer',
+                      lab: data.id_lab,
+                    }}
+                    successCallback={()=>{}}
+                  />
+                  <Tooltip title="На страницу предмета" placement="top" arrow>
+                    <IconButton aria-label="upload" >
+                      <ForwardIcon />
+                    </IconButton>
+                  </Tooltip>
+                </div>
+              </div>
+            </Paper>);
+        })}
         {/* <MuiTable
           style={{ paddingTop: 10 }}
           title="Список лабораторных работ"

@@ -4,6 +4,7 @@ import { red, orange, green, blue } from "@material-ui/core/colors";
 export default makeStyles((theme) => ({
   paper: {
     padding: "6px 16px",
+    margin: '10px 0',
   },
   date: {
     padding: "6px 5px",

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import Helmet from 'react-helmet';
 
 // layout
 import StudentLayout from "./layout/student/StudentLayout/StudentLayout";
@@ -32,7 +33,11 @@ export default function App() {
     );
   }
   
-  return (
+  return (<>
+    <Helmet
+      defaultTitle="Odin Laboratory"
+      titleTemplate="%s - СДО АУЦ ФПЛС"
+    />
     <Switch>
       <Route exact path="/" render={() => <Redirect to="/student" />} />
       <Route exact path="/admin" render={() => <Redirect to="/teacher" />} />
@@ -42,7 +47,7 @@ export default function App() {
       <UnauthenticatedRoute path="/register" component={Register} />
       <Route component={Error} />
     </Switch>
-  );
+  </>);
 
   // #######################################################################
 

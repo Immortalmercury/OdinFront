@@ -12,10 +12,21 @@ import MyDisciplines from '../../../pages/teacher/MyDisciplines/index';
 import DisciplineConfigLayout from "../../../pages/teacher/DisciplineConfig/DisciplineConfigLayout";
 import Profile from '../../../pages/teacher/Profile/index';
 import AllDisciplines from "../../../pages/teacher/AllDisciplines";
+import AllCourses from './../../../pages/teacher/AllCourses/index';
+import CourseConfigLayout from './../../../pages/teacher/CourseConfig/CourseConfigLayout';
+import { Helmet } from 'react-helmet';
+import { useUserState } from "../../../context/UserContext";
 
 function AdminLayout(props) {
   var classes = useStyles();
+  var { role } = useUserState();
   return (<>
+    <Helmet
+      defaultTitle={(role === 'teacher' ? "Преподаватель":"Администратор") +" - СДО АУЦ ФПЛС"}
+      titleTemplate={"%s - " +
+        (role === 'teacher' ? "Преподаватель":"Администратор") +
+        " - СДО АУЦ ФПЛС"}
+    />
     <div className={classes.root}>
       <Menu history={props.history} />
       <div className={classnames(classes.content)}>
@@ -29,6 +40,8 @@ function AdminLayout(props) {
           <Route exact path="/teacher/groups" component={Groups} />
           <Route exact path="/teacher/users" component={Users} />
           <Route exact path="/teacher/all_disciplines" component={AllDisciplines} />
+          <Route exact path="/teacher/courses/all" component={AllCourses} />
+          <Route exact path="/teacher/courses/:id_course" component={CourseConfigLayout} />
         </Switch>
       </div>
     </div>

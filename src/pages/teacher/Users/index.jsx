@@ -51,7 +51,7 @@ const convertData = (tab, data, classes, deleteRequest, passwordForDelete, delet
               color="secondary"
               className={classes.B2}
               onClick={() => {
-                deleteRequest("delete_invite", el.login);
+                deleteRequest("delete_invitation", el.login);
               }}
             >
               <Delete />

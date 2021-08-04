@@ -26,7 +26,6 @@ import {
 } from "@material-ui/icons";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
-import photo from './123123.jpg'
 // import { useUserDispatch, logoutUser } from "./../../context/UserContext";
 
 // styles
@@ -57,6 +56,7 @@ const structureAdmin = [
   { id: 11, type: "title", label: "Администрирование" },
   { id: 9, label: "Пользователи", link: "/teacher/users", icon: <PermIdentity /> },   
   { id: 12, label: "Все дисциплины", link: "/teacher/all_disciplines", icon: <ViewListIcon /> },  
+  { id: 12, label: "Все курсы", link: "/teacher/courses/all", icon: <ViewListIcon /> },  
 ];
 
 const getData = async (setData, setIsLoading) => {

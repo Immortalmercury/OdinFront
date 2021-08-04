@@ -9,11 +9,15 @@ import useStyles from "./styles";
 // logo
 // import logo from "./logo.svg";
 // import Logo from './../../components/Logo/index';
+import { Helmet } from 'react-helmet';
 
 export default function Error() {
   var classes = useStyles();
 
-  return (
+  return (<>
+    <Helmet
+      title="Страница не найдена"
+    />
     <Grid container className={classes.container}>
       {/* <div className={classes.logotype}> */}
         {/* <img className={classes.logotypeIcon} src={logo} alt="logo" />  */}
@@ -53,5 +57,6 @@ export default function Error() {
         </Button>
       </Paper>
     </Grid>
+    </>
   );
 }

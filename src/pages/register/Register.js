@@ -27,6 +27,7 @@ import UploadFileButton from "./../../components/Buttons/UploadFileButton";
 import { setTokens } from "../../services/JWT";
 import { useUserDispatch } from "./../../context/UserContext";
 import ClientJS from 'clientjs';
+import { Helmet } from 'react-helmet';
 
 const limitName = "attemptLimited";
 
@@ -187,7 +188,10 @@ function Register(props) {
     };
   }, [attemptLimit]);
 
-  return (
+  return (<>
+    <Helmet
+      title="Регистрация"
+    />
     <Grid container component="main" className={classes.root}>
       <Grid
         item
@@ -544,7 +548,7 @@ function Register(props) {
         </div>
       </Grid>
     </Grid>
-  );
+  </>);
 }
 
 export default withRouter(Register);

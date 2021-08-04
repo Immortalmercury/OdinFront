@@ -109,19 +109,19 @@ export default function DisciplineLayout(props) {
             </Tabs>
           </AppBar>
         </Paper>
-        <TabPanel value={tab} index={'edu'}>        <DisciplineEduProgram setTab={setTab} {...props}/></TabPanel>
-        <TabPanel value={tab} index={'labs'}>               <DisciplineLabs setTab={setTab} {...props}/></TabPanel>
-        {discipline.exam_forms.indexOf("Курсовая работа") !== -1 &&   
-        <TabPanel value={tab} index={'course'}>             <DisciplineCourse setTab={setTab} {...props} /></TabPanel>}
-        {discipline.exam_forms.indexOf("Экзамен")         !== -1 &&   
-        <TabPanel value={tab} index={'exam'}>               <DisciplineExam setTab={setTab} {...props}/></TabPanel>}
-        {discipline.exam_forms.indexOf("Зачет")           !== -1 &&   
-        <TabPanel value={tab} index={'credit'}>             <DisciplineCredit setTab={setTab} {...props}/></TabPanel>}
-        {discipline.exam_forms.indexOf("Диф. зачет")      !== -1 &&   
-        <TabPanel value={tab} index={'differentialCredit'}> <DisciplineDifferentialCredit setTab={setTab} {...props}/></TabPanel>}
-        <TabPanel value={tab} index={'resources'}>          <DisciplineResources setTab={setTab} {...props}/></TabPanel>
-        <TabPanel value={tab} index={'about'}>              <DisciplineAbout setTab={setTab} {...props}/></TabPanel>
-          {/* <Switch> */}
+          <TabPanel value={tab} index={'edu'}>        <DisciplineEduProgram setTab={setTab} {...props}/></TabPanel>
+          <TabPanel value={tab} index={'labs'}>               <DisciplineLabs setTab={setTab} {...props}/></TabPanel>
+          {discipline.exam_forms.indexOf("Курсовая работа") !== -1 &&   
+          <TabPanel value={tab} index={'course'}>             <DisciplineCourse setTab={setTab} {...props} /></TabPanel>}
+          {discipline.exam_forms.indexOf("Экзамен")         !== -1 &&   
+          <TabPanel value={tab} index={'exam'}>               <DisciplineExam setTab={setTab} {...props}/></TabPanel>}
+          {discipline.exam_forms.indexOf("Зачет")           !== -1 &&   
+          <TabPanel value={tab} index={'credit'}>             <DisciplineCredit setTab={setTab} {...props}/></TabPanel>}
+          {discipline.exam_forms.indexOf("Диф. зачет")      !== -1 &&   
+          <TabPanel value={tab} index={'differentialCredit'}> <DisciplineDifferentialCredit setTab={setTab} {...props}/></TabPanel>}
+          <TabPanel value={tab} index={'resources'}>          <DisciplineResources setTab={setTab} {...props}/></TabPanel>
+          <TabPanel value={tab} index={'about'}>              <DisciplineAbout setTab={setTab} {...props} /></TabPanel>
+        {/* <Switch> */}
           {/* <Route path="/app/semester/:semester_num/discipline/:id_discipline/labs" render={(props) => { setTab(props.match.params.tab); return (<DisciplineLabs/>); } } />
           <Route path="/app/semester/:semester_num/discipline/:id_discipline/course" render={(props) => { setTab(props.match.params.tab); return (<DisciplineCourse/>); } } />
           <Route path="/app/semester/:semester_num/discipline/:id_discipline/exam" render={(props) => { setTab(props.match.params.tab); return (<DisciplineExam/>); } } />

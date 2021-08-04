@@ -8,11 +8,13 @@ import useStyles from "./styles";
 
 // components
 import { Badge, Typography } from "./../Wrappers/Wrappers";
+import { Helmet } from 'react-helmet';
 
 export default function Header(props) {
   var classes = useStyles();
 
-  return (
+  return (<>
+    {props.title !== 'Загрузка' && (<Helmet title={props.title} />)}
     <AppBar position="fixed" color={"primary"} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <IconButton
@@ -40,5 +42,5 @@ export default function Header(props) {
         {props.button && props.button}
       </Toolbar>
     </AppBar>
-  );
+  </>);
 }

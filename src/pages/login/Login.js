@@ -20,6 +20,7 @@ import {
   loginUser,
   logoutUser,
 } from "./../../context/UserContext";
+import Helmet from 'react-helmet';
 
 const limitName = "attemptLimited";
 
@@ -83,7 +84,10 @@ function Login(props) {
     };
   }, [attemptLimit]);
 
-  return (
+  return (<>
+    <Helmet
+      title="Вход"
+    />
     <Grid container component="main" className={classes.root}>
       <Grid
         item
@@ -296,6 +300,7 @@ function Login(props) {
         </div>
       </Grid>
     </Grid>
+    </>
   );
 }
 
