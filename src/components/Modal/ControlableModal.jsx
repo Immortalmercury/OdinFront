@@ -12,30 +12,38 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
+import { useEffect } from 'react';
 
-const SimpleModal = ({
-  onClose = ()=>{},
+const ControlableModal = ({
+  onClose = ()=>{return true},
   openButtonTitle = "Открыть модальное окно",
   modalTitle = "Модальное окно",
   width = "xs",
   titleButtons= null,
+  prerendered = false,
+  open = false, // React.state varible
+  setOpen = (value) => { }, // React.state function
+  noOpenButton = false,
   children
 }) => {
-  const [modalOpen, setModalOpen] = useState(false);
   const classes = useStyles();
 
   return (
     <>
-      <Tooltip title={openButtonTitle} placement="top" arrow>
-        <Fab color="primary" onClick={() => setModalOpen(true)}>
-          <Add />
-        </Fab>
-      </Tooltip>
-      {modalOpen && (
+      {!noOpenButton && (
+        <Tooltip title={openButtonTitle} placement="top" arrow>
+          <Fab color="primary" onClick={() => { setOpen(true);}}>
+            <Add />
+          </Fab>
+        </Tooltip>
+      )}
+      {(open || prerendered) && (
         <Dialog
-          open={modalOpen}
-          fullWidth={true}
+          // style={(prerendered && (open? {display:'block'}: {display:'none'}))}
+          // open={(!prerendered ? open:true)}
+          open={open}
           maxWidth={width}
+          fullWidth
         >
           <DialogTitle disableTypography className={classes.root}>
             <Typography variant="h6">{modalTitle}</Typography>
@@ -47,8 +55,8 @@ const SimpleModal = ({
             <IconButton
               className={classes.closeButton}
               onClick={() => {
-                setModalOpen(false);
-                onClose();
+                if (onClose() === true)
+                  setOpen(false);
               }}
             >
               <CloseIcon />
@@ -63,4 +71,4 @@ const SimpleModal = ({
   );
 };
 
-export default SimpleModal;
+export default ControlableModal;

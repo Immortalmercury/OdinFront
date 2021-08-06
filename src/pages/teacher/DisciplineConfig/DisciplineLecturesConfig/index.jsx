@@ -13,6 +13,12 @@ import AlertDialog from "../../../../components/AlertDialog";
 import { Typography } from "@material-ui/core";
 import CreateLabModal from "./CreateLabModal";
 import Section from "../../../../components/Section";
+import SimpleModal from "../../../../components/Modal/SimpleModal";
+import NiedEditor from "../../../../components/Editor";
+import SecondsToRusTime from "../../../../components/SecondsToRusTime";
+import { Edit } from '@material-ui/icons';
+import EditModal from './EditModal';
+import { Fab } from '@material-ui/core';
 
 const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
   ",",
@@ -29,6 +35,37 @@ const DisciplineLecturesConfig = (props) => {
   const [progressId, setProgressId] = useState(false);
   const [open, setOpen] = useState(false);
   const [alertDescription, setAlertDescription] = useState(null);
+
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [editorId, setEditorId] = useState(false);
+  const [editorTitle, setEditorTitle] = useState(false);
+  const [lectureName, setLectureName] = useState(null);
+  const [lectureTime, setLectureTime] = useState(null);
+  const [lectureContent, setLectureContent] = useState(null);
+  const [lectureInitialContent, setLectureInitialContent] = useState(null);
+  const [lectureEditorId, setLectureEditorId] = useState(null);
+
+  function editLecture(id, name, time, content) {
+    setLectureEditorId(id);
+    setLectureName(name);
+    setLectureTime(time);
+    setLectureInitialContent(content);
+    setEditorTitle("Редактирование: "+name);
+    setEditorOpen(true);
+  }
+
+  function createLecture() {
+    setLectureEditorId(null);
+    setLectureName(null);
+    setLectureTime(null);
+    setLectureInitialContent(null);
+    setEditorTitle("Создание лекции");
+    setEditorOpen(true);
+  }
+
+  function handleEditorSave(name,time,content) {
+    console.log({lectureEditorId,name,time,content});
+  }
 
   const removeFile = async (id_lab) => {
     setProgress(true);
@@ -63,7 +100,7 @@ const DisciplineLecturesConfig = (props) => {
       discipline: id_discipline,
     }).then((result) => {
       if (result.success) {
-        getData();
+        // getData();
       } else {
         setProgress(false);
         setProgressId(false);
@@ -85,25 +122,25 @@ const DisciplineLecturesConfig = (props) => {
     });
   };
 
-  const getData = async () => {
-    await API.call({
-      method: "get_discipline_labs",
-      discipline: id_discipline,
-    }).then((result) => {
-      if (result.success) {
-        setData(result.data);
-      }
-      setProgress(false);
-      setProgressId(false);
-    });
-  };
+  // const getData = async () => {
+  //   await API.call({
+  //     method: "get_discipline_labs",
+  //     discipline: id_discipline,
+  //   }).then((result) => {
+  //     if (result.success) {
+  //       setData(result.data);
+  //     }
+  //     setProgress(false);
+  //     setProgressId(false);
+  //   });
+  // };
 
-  useEffect(() => {
-    getData();
-    return () => {
-      setData(null);
-    };
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  //   return () => {
+  //     setData(null);
+  //   };
+  // }, []);
 
 
   return (
@@ -119,18 +156,17 @@ const DisciplineLecturesConfig = (props) => {
           setProgressId(false);
         }}
       />
-      {/* yarn add @edsdk/n1ed-react */}
       <Section update={update} setUpdate={setUpdate} debug noDataAllowed
         setData={setData}
         requestData={{
           method: 'getLectures',
-          id_discipline,
+          discipline: id_discipline,
         }}
       >
         <MuiTable
           title="Список лекций"
           columns={[
-            "ID",
+            "№, (ID)",
             "Название",
             "Минимальное время",
             "Изменен",
@@ -150,16 +186,9 @@ const DisciplineLecturesConfig = (props) => {
                       el.updated_at = new Date(el.updated_at);
 
                       newData.push([
-                        index + 1 + " (ID" + el.id_lab + ")",
-                        <>
-                          {el.description}
-                          {el.comment && (
-                            <>
-                              <br />
-                              {"(" + el.comment + ")"}
-                            </>
-                          )}
-                        </>,
+                        index + 1 + " (ID" + el.id_lecture + ")",
+                        el.name,
+                        <SecondsToRusTime time={el.time}/>,
                         el.updated_at.getDate() +
                           monthA[el.updated_at.getMonth()] +
                           el.updated_at.getFullYear() +
@@ -168,39 +197,26 @@ const DisciplineLecturesConfig = (props) => {
                           ":" +
                           el.updated_at.getMinutes(),
                         <div style={{ display: "flex" }}>
-                          <UploadFileButton
-                            data={{
-                              method: "upload_lab_file",
-                              lab: el.id_lab,
+                          <IconButton
+                            color={"primary"}
+                            onClick={() => {
+                              editLecture(
+                                el.id_lecture,
+                                el.name,
+                                el.time,
+                                el.content
+                              );
                             }}
-                            label={
-                              (el.file === null
-                                ? "Загрузить"
-                                : "Обновить") + " файл задания"
-                            }
-                            buttonType={"IconButton"}
-                            successCallback={getData}
                             disabled={progress}
-                          />
-                          {el.file !== null && (
-                            <IconButton
-                              variant="contained"
-                              color="primary"
-                              onClick={() => {
-                                getFile(
-                                  el.id_lab,
-                                  el.description +
-                                    "." +
-                                    el.file.split(".")[1],
-                                );
-                              }}
-                              disabled={progress}
-                            >
-                              <GetApp />
-                            </IconButton>
-                          )}
-                        </div>,
-                        <div style={{ display: "flex" }}>
+                          >
+                              <Tooltip
+                                title="Редактировать"
+                                placement="top"
+                                arrow
+                              >
+                                <Edit />
+                              </Tooltip>
+                          </IconButton>
                           <IconButton
                             variant="outlined"
                             color="secondary"
@@ -210,7 +226,7 @@ const DisciplineLecturesConfig = (props) => {
                             }}
                             disabled={progress}
                           >
-                            {progress && progressId === el.id_lab ? (
+                            {progress && progressId === el.id_lecture ? (
                               <CircularProgress
                                 color="primary"
                                 size={20}
@@ -232,11 +248,23 @@ const DisciplineLecturesConfig = (props) => {
                 })()
           }
         />
+        <EditModal
+          onClose={()=>setLectureEditorId(null)}
+          name={lectureName}
+          time={lectureTime}
+          initialContent={lectureInitialContent}
+          open={editorOpen}
+          setOpen={setEditorOpen}
+          title={editorTitle}
+          onSave={handleEditorSave}
+        />
+        {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
         <div style={{ position: "fixed", right: 0, bottom: 0, margin: 30 }}>
-          <CreateLabModal
-            appendDataCallback={getData}
-            discipline={id_discipline}
-          />
+          <Tooltip title="Создать лекцию" placement="top" arrow>
+            <Fab color="primary" onClick={() => { createLecture() }}>
+              <Add />
+            </Fab>
+          </Tooltip>
         </div>
       </Section>
     </>
