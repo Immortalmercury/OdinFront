@@ -58,4 +58,20 @@ export default makeStyles(theme => ({
         justifyContent: 'space-between',
         marginLeft: 0,
     },
+    editorLabel: {
+        color: '#6E6E6E',
+        fontSize: '0.75rem',
+        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+        fontWeight: '400',
+        lineHeight: '1',
+        letterSpacing: '0.00938em',
+        padding: '10px 10px',
+        marginBottom: -17,
+        zIndex: 10,
+    },
+    editorLabelText: {
+        backgroundColor: 'white',
+        padding: '0px 5px',
+        fontSize: '0.75rem',
+    }
 }));

@@ -41,7 +41,7 @@ const Editor = ({ initialContent, setContent, debug = false, withoutN1edScript =
           'advlist autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',
           'insertdatetime media table paste code help wordcount',
-          'n1ed'
+          // 'n1ed'
         ],
         apiKey: "OSZMDFLT",
         toolbar:

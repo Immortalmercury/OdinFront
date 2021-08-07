@@ -42,6 +42,33 @@ export const call = async (data, route = defaultRoute, enabledConsoleLog = false
     });
 }
 
+export const callV2 = async(method, route, data,  enabledConsoleLog = false) => {
+    var headers = await AuthHeader(enabledConsoleLog);
+    return request({
+        method: method,
+        url: route,
+        baseURL: baseRoute,
+        data: data,
+        headers: headers
+      })
+    .then((response) => {
+        let result = response.data;
+        if (enabledConsoleLog) {   
+            if (result.success) {
+                console.log('Successful request to ' + route);
+            } else {
+                console.log('Failed request to ' + route);
+            }
+            console.log({requestParameters:{data,headers},resultData:result});
+        }
+        return result;
+    })
+    .catch((error) => {
+        // console.error(error)
+        return error;
+    });
+}
+
 
 export const filecall = async (data,filename, enabledConsoleLog = false) => {
     var headers = await AuthHeader(enabledConsoleLog);
@@ -129,4 +156,4 @@ export const logout = async (tokenSessionId = null) => {
     });
 }
 
-export default {filecall,call,login,logout};
+export default {filecall,call,callV2,login,logout};

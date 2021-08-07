@@ -5,6 +5,10 @@ const SecondsToRusTime = ({time}) => {
   var hoursLeft = null;
   var minutesLeft = null;
 
+  if (time === null) {
+    return null;
+  }
+
   return (<>
     {(daysLeft = Math.floor(time / 60 / 60 / 24)) >0 && daysLeft}
     {(daysLeft>5 && daysLeft<20) || daysLeft%10 > 4 || (daysLeft%10 === 0 && daysLeft>=20) ? ' дней ' :

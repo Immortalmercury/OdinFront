@@ -27,7 +27,12 @@ const SecondsPicker = ({
     if (Number.isInteger(value)) {
       return new Date(value * 1000);
     } else {
-      let seconds = value.getTime() / 1000 - offset;
+      let seconds = 0;
+      try {
+        seconds = value.getTime() / 1000 - offset;
+      } catch (error) {
+        return null;
+      }
       if (seconds === 0)
         return null;
       return seconds;

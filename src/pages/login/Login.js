@@ -293,7 +293,6 @@ function Login(props) {
                     Регистрация
                   </Button>
                 </div>
-                {/* TODO: Add register blocks */}
               </>
             )}
           </Paper>

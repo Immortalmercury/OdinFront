@@ -9,6 +9,7 @@ export default makeStyles((theme) => ({
   wrapper: {
     margin: theme.spacing(1),
     position: 'relative',
+    width: 'inherit',
   },
   buttonSuccess: {
     color: "white",

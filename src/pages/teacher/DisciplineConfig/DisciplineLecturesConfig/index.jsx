@@ -1,176 +1,77 @@
-/* eslint-disable array-callback-return */
-import React, { useState, useEffect } from "react";
-import { Grid, IconButton, Tooltip } from "@material-ui/core";
-import MUIDataTable from "mui-datatables";
-import API from "../../../../services/API";
-import LoadingPage from "../../../../components/Loading";
-import { Add, Archive, Delete, Description, GetApp } from "@material-ui/icons";
+import React, { useState } from "react";
+import { IconButton, Tooltip, CircularProgress, Fab } from "@material-ui/core";
+import { Add, Delete, Edit } from "@material-ui/icons";
 import useStyles from "./styles";
-import UploadFileButton from "../../../../components/FileButtons/UploadFileButton";
-import MuiTable from "../../../../components/MuiTable";
-import { CircularProgress } from "@material-ui/core";
-import AlertDialog from "../../../../components/AlertDialog";
-import { Typography } from "@material-ui/core";
-import CreateLabModal from "./CreateLabModal";
-import Section from "../../../../components/Section";
-import SimpleModal from "../../../../components/Modal/SimpleModal";
-import NiedEditor from "../../../../components/Editor";
-import SecondsToRusTime from "../../../../components/SecondsToRusTime";
-import { Edit } from '@material-ui/icons';
 import EditModal from './EditModal';
-import { Fab } from '@material-ui/core';
-
-const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
-  ",",
-);
+import API from "../../../../services/API";
+import MuiTable from "../../../../components/MuiTable";
+import Section from "../../../../components/Section";
+import SecondsToRusTime from "../../../../components/SecondsToRusTime";
+import SecureOptionSwitcher from '../../../../components/SecureOptionSwitcher';
+import DateToRusTime from "../../../../components/DateToRusTime";
 
 const DisciplineLecturesConfig = (props) => {
   const classes = useStyles();
+  const id_discipline = props.match.params.id_discipline;
+  const route = "/discipline/" + id_discipline + '/lecture';
+
+  // Section
   const [data, setData] = useState(null);
   const [update, setUpdate] = useState(null);
   
-  
-  const id_discipline = props.match.params.id_discipline;
-  const [progress, setProgress] = useState(false);
+  // Delete operation
   const [progressId, setProgressId] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [alertDescription, setAlertDescription] = useState(null);
-
+  const [deleteAllowed, setDeleteAllowed] = useState(false);
+  const [confirmationPassword, setConfirmationPassword] = useState("");
+  
+  // Editor varibles
   const [editorOpen, setEditorOpen] = useState(false);
-  const [editorId, setEditorId] = useState(false);
-  const [editorTitle, setEditorTitle] = useState(false);
-  const [lectureName, setLectureName] = useState(null);
-  const [lectureTime, setLectureTime] = useState(null);
-  const [lectureContent, setLectureContent] = useState(null);
-  const [lectureInitialContent, setLectureInitialContent] = useState(null);
-  const [lectureEditorId, setLectureEditorId] = useState(null);
 
-  function editLecture(id, name, time, content) {
-    setLectureEditorId(id);
-    setLectureName(name);
-    setLectureTime(time);
-    setLectureInitialContent(content);
-    setEditorTitle("Редактирование: "+name);
+  function edit(id) {
+    setProgressId(id);
     setEditorOpen(true);
   }
 
-  function createLecture() {
-    setLectureEditorId(null);
-    setLectureName(null);
-    setLectureTime(null);
-    setLectureInitialContent(null);
-    setEditorTitle("Создание лекции");
+  function create() {
+    setProgressId(null);
     setEditorOpen(true);
   }
 
-  function handleEditorSave(name,time,content) {
-    console.log({lectureEditorId,name,time,content});
-  }
-
-  const removeFile = async (id_lab) => {
-    setProgress(true);
-    setProgressId(id_lab);
-    await API.call({
-      method: "check_lab_data",
-      lab: id_lab,
-      discipline: id_discipline,
-    }).then((result) => {
-      if (result.success) {
-        if (result.status === "DATA_EXISTS") {
-          let message = <>{result.data.map(el => 
-            <Typography>{el}</Typography>
-          )}</>;
-          // console.log(message);
-          setAlertDescription(message);
-          setOpen(true);
-        } else if (result.status === "DATA_NOT_EXISTS") {
-          agreedRemoving();
-        }
-      } else {
-        setProgress(false);
-        setProgressId(false);
-      }
+  const remove = async (id) => {
+    setProgressId(id);
+    await API.callV2("DELETE", route + '/' + id, {
+      confirmationPassword
+    }).then(result => {
+      setUpdate('silent');
     });
   };
-
-  const agreedRemoving = async () => {
-    await API.call({
-      method: "delete_lab",
-      lab: progressId,
-      discipline: id_discipline,
-    }).then((result) => {
-      if (result.success) {
-        // getData();
-      } else {
-        setProgress(false);
-        setProgressId(false);
-      }
-    });
-  };
-
-  const getFile = async (lab, filename) => {
-    await API.filecall(
-      {
-        method: "get_lab_file",
-        lab: lab,
-      },
-      filename,
-    ).then((result) => {
-      if (!result.success) {
-        alert("Ошибка загрузки! Откройте консоль!");
-      }
-    });
-  };
-
-  // const getData = async () => {
-  //   await API.call({
-  //     method: "get_discipline_labs",
-  //     discipline: id_discipline,
-  //   }).then((result) => {
-  //     if (result.success) {
-  //       setData(result.data);
-  //     }
-  //     setProgress(false);
-  //     setProgressId(false);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  //   return () => {
-  //     setData(null);
-  //   };
-  // }, []);
-
 
   return (
     <>
-      <AlertDialog
-        open={open}
-        setOpen={setOpen}
-        question={"Удалить лабораторную вместе со всеми данными?"}
-        description={alertDescription}
-        successCallback={agreedRemoving}
-        failCallback={() => {
-          setProgress(false);
-          setProgressId(false);
+      <Section update={update} setUpdate={setUpdate} noDataAllowed
+        setData={(data) => {
+          setData(data);
+          setProgressId(null);
         }}
-      />
-      <Section update={update} setUpdate={setUpdate} debug noDataAllowed
-        setData={setData}
-        requestData={{
-          method: 'getLectures',
-          discipline: id_discipline,
-        }}
+        request={{route}}
       >
+        <div style={{ paddingBottom: 10 }}>
+          <SecureOptionSwitcher
+            label={"Удаление лекций"}
+            passwordValue={confirmationPassword}
+            setPasswordValue={setConfirmationPassword}
+            allowed={deleteAllowed}
+            setAllowed={setDeleteAllowed}
+          />
+        </div>
         <MuiTable
           title="Список лекций"
           columns={[
-            "№, (ID)",
+            "№ (ID)",
             "Название",
             "Минимальное время",
             "Изменен",
-            "Действия (edit, delete)",
+            "Действия",
           ]}
           noMatch={"Нет лекций"}
           data={
@@ -181,66 +82,40 @@ const DisciplineLecturesConfig = (props) => {
                   if (data !== null)
                     for (let index = 0; index < data.length; index++) {
                       const el = data[index];
-                      if (el.updated_at === null)
-                        el.updated_at = el.created_at;
-                      el.updated_at = new Date(el.updated_at);
+                      const id = el.id_lecture;
 
                       newData.push([
-                        index + 1 + " (ID" + el.id_lecture + ")",
+                        index + 1 + " (ID " + id + ")",
                         el.name,
-                        <SecondsToRusTime time={el.time}/>,
-                        el.updated_at.getDate() +
-                          monthA[el.updated_at.getMonth()] +
-                          el.updated_at.getFullYear() +
-                          " " +
-                          el.updated_at.getHours() +
-                          ":" +
-                          el.updated_at.getMinutes(),
+                        <SecondsToRusTime time={el.time} />,
+                        <DateToRusTime time={el.updated_at || el.created_at}/>,
                         <div style={{ display: "flex" }}>
                           <IconButton
                             color={"primary"}
                             onClick={() => {
-                              editLecture(
-                                el.id_lecture,
-                                el.name,
-                                el.time,
-                                el.content
-                              );
+                              edit(id);
                             }}
-                            disabled={progress}
+                            disabled={progressId}
                           >
-                              <Tooltip
-                                title="Редактировать"
-                                placement="top"
-                                arrow
-                              >
-                                <Edit />
-                              </Tooltip>
+                            <Tooltip title="Редактировать" placement="top" arrow><Edit /></Tooltip>
                           </IconButton>
-                          <IconButton
-                            variant="outlined"
-                            color="secondary"
-                            className={classes.B2}
-                            onClick={() => {
-                              removeFile(el.id_lab);
-                            }}
-                            disabled={progress}
-                          >
-                            {progress && progressId === el.id_lecture ? (
-                              <CircularProgress
-                                color="primary"
-                                size={20}
-                              />
-                            ) : (
-                              <Tooltip
-                                title="Удалить"
-                                placement="top"
-                                arrow
-                              >
-                                <Delete />
-                              </Tooltip>
-                            )}
-                          </IconButton>
+                          {deleteAllowed && (
+                            <IconButton
+                              variant="outlined"
+                              color="secondary"
+                              className={classes.B2}
+                              disabled={progressId}
+                              onClick={() => {
+                                remove(id);
+                              }}
+                            >
+                              {progressId === id ? (
+                                <CircularProgress color="primary" size={20} />
+                              ) : (
+                                <Tooltip title="Удалить" placement="top" arrow><Delete /></Tooltip>
+                              )}
+                            </IconButton>
+                          )}
                         </div>,
                       ]);
                     }
@@ -249,19 +124,17 @@ const DisciplineLecturesConfig = (props) => {
           }
         />
         <EditModal
-          onClose={()=>setLectureEditorId(null)}
-          name={lectureName}
-          time={lectureTime}
-          initialContent={lectureInitialContent}
+          onClose={() => setProgressId(null)}
+          onSave={() => setUpdate('silent')}
+          id={progressId}
+          route={route}
           open={editorOpen}
           setOpen={setEditorOpen}
-          title={editorTitle}
-          onSave={handleEditorSave}
         />
         {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
         <div style={{ position: "fixed", right: 0, bottom: 0, margin: 30 }}>
           <Tooltip title="Создать лекцию" placement="top" arrow>
-            <Fab color="primary" onClick={() => { createLecture() }}>
+            <Fab color="primary" onClick={() => { create() }}>
               <Add />
             </Fab>
           </Tooltip>

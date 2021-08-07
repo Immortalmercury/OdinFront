@@ -13,14 +13,14 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import Close from "@material-ui/icons/Close";
 import useStyles from "./styles";
 
-export default function RequestButton({
-  requestData,
+export default function RequestV2Button({
+  request,
   onSuccess,
   label,
   buttonType,
   icon,
-  debug = false,
   fullWidth = false,
+  debug = false,
   ...props
 }) {
   const classes = useStyles();
@@ -39,11 +39,16 @@ export default function RequestButton({
     [classes.iconButtonError]: error,
   });
 
-  const request = () => {
+  const makeRequest = () => {
     setSuccess(false);
     setError(false);
     setLoading(true);
-    API.call(requestData, null, debug).then((result) => {
+    API.callV2(
+      request.method,
+      request.route,
+      request.data,
+      debug
+    ).then((result) => {
       if (debug) console.log(result);
       if (result.success) {
         if (onSuccess) onSuccess(result.data);
@@ -81,7 +86,7 @@ export default function RequestButton({
                 component="label"
                 {...props}
                 onClick={() => {
-                  request();
+                  makeRequest();
                 }}
               >
                 <div style={{ textAlign: "center" }}>

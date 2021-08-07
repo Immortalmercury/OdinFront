@@ -11,6 +11,7 @@ import { Button } from '@material-ui/core';
 const Section = ({
   children,
   requestData,
+  request,
   setData,
   update,
   setUpdate = null,
@@ -24,50 +25,65 @@ const Section = ({
   const [error, setError] = useState(null);
   const [openTime, setOpenTime] = useState(null);
 
-  const getData = async (opening = false) => {
-    if (opening) setLoading(true);
-    await API.call(requestData,null,debug).then((result) => {
-      if (result.success) {
-        if (result.data !== undefined) {
-          setData(result.data);
-          if (result.data.allowed_after !== undefined &&result.data.allowed_after !== null && result.data.openTime === undefined) {
-            setOpenTime(result.data.allowed_after);
-          } else if (result.data.openTime !== undefined && result.data.openTime !== null) {
-            setOpenTime(result.data.openTime);
-          } else {
-            setOpened(true);
-          }
-        } else if (noDataAllowed) {
-          setData(result.data);
-          setOpened(true);
+  const responseHandler = (result) => {
+    if (result.success) {
+      if (result.data !== undefined) {
+        setData(result.data);
+        if (result.data.allowed_after !== undefined &&result.data.allowed_after !== null && result.data.openTime === undefined) {
+          setOpenTime(result.data.allowed_after);
+        } else if (result.data.openTime !== undefined && result.data.openTime !== null) {
+          setOpenTime(result.data.openTime);
         } else {
-          setError(
-            <>
-              <Typography variant="h5">Запрос выполнен</Typography>
-              <Typography variant="h6">
-                Статус ответа: {result.status}
-              </Typography>
-              <Typography variant="h6">Данные не предоставлены</Typography>
-            </>,
-          );
+          setOpened(true);
         }
+      } else if (noDataAllowed) {
+        setData(result.data);
+        setOpened(true);
       } else {
         setError(
           <>
-            <Typography variant="h5">Ошибка выполнения запроса</Typography>
-            <Typography variant="h6">Статус ответа: {result.status}</Typography>
-            {(typeof result.message === 'string' || result.message instanceof String) && (
-              <>
-                <Typography variant="h6">
-                  Сообщение: {result.message}
-                </Typography>
-              </>
-            )}
+            <Typography variant="h5">Запрос выполнен</Typography>
+            <Typography variant="h6">
+              Статус ответа: {result.status}
+            </Typography>
+            <Typography variant="h6">Данные не предоставлены</Typography>
           </>,
         );
       }
-      setLoading(null);
-    });
+    } else {
+      setError(
+        <>
+          <Typography variant="h5">Ошибка выполнения запроса</Typography>
+          <Typography variant="h6">Статус ответа: {result.status}</Typography>
+          {(typeof result.message === 'string' || result.message instanceof String) && (
+            <>
+              <Typography variant="h6">
+                Сообщение: {result.message}
+              </Typography>
+            </>
+          )}
+        </>,
+      );
+    }
+    setLoading(null);
+  }
+
+  const getData = async (opening = false) => {
+    if (opening) setLoading(true);
+    if (request === null) {
+      setOpened(true);
+      setLoading(false);
+    }
+    if (request !== undefined) {
+      await API.callV2(
+        request.method || 'GET',
+        request.route,
+        request.data || null,
+        debug
+      ).then(responseHandler);
+    } else {
+      await API.call(requestData, null, debug).then(responseHandler);
+    }
   };
 
   useEffect(() => {
