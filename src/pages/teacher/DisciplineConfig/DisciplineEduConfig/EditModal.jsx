@@ -57,7 +57,7 @@ const EditModal = ({
 
   return (
       <ControlableModal
-        modalTitle={id === null ? 'Создать тест' : 'Редактировать тест (ID '+ id +')'}
+        modalTitle={id === null ? 'Добавить элемент' : 'Редактировать элемент'}
         onClose={() => {
           if (formChanged === true) {
             setCloseConfirmation(true);
@@ -66,7 +66,7 @@ const EditModal = ({
           close();
           return true;
         }}
-        width="lg"
+        width="md"
         open={open}
         setOpen={setOpen}
         noOpenButton

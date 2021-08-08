@@ -11,7 +11,8 @@ import {
 const SecondsPicker = ({
   label,
   value = null,
-  onChange=(v)=>{}
+  onChange = (v) => { },
+  ...props
 }) => {
 
   const [time, setTime] = useState(value);
@@ -49,20 +50,21 @@ const SecondsPicker = ({
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ ruLocale }>
-        <KeyboardTimePicker
-          clearable
-          ampm={false}
-          inputVariant="outlined"
-          margin="normal"
-          id="time-picker"
-          initialFocusedDate={"01.01.1970 00:00:00"}
-          format="HH:mm:ss"
-          label={label}
-          value={time}
-          onChange={handleChange}
-          views={["hours", "minutes", "seconds"]}
-        />
-      </MuiPickersUtilsProvider>
+      <KeyboardTimePicker
+        clearable
+        ampm={false}
+        inputVariant="outlined"
+        margin="normal"
+        id="time-picker"
+        initialFocusedDate={"01.01.1970 00:00:00"}
+        format="HH:mm:ss"
+        label={label}
+        value={time}
+        onChange={handleChange}
+        views={["hours", "minutes", "seconds"]}
+        {...props}
+      />
+    </MuiPickersUtilsProvider>
   );
 }
 

@@ -10,7 +10,7 @@ import SecondsToRusTime from "../../../../components/SecondsToRusTime";
 import SecureOptionSwitcher from '../../../../components/SecureOptionSwitcher';
 import DateToRusTime from "../../../../components/DateToRusTime";
 
-const DisciplineTestsConfig = (props) => {
+const DisciplineLecturesConfig = (props) => {
   const classes = useStyles();
   const id_discipline = props.match.params.id_discipline;
   const route = "/discipline/" + id_discipline + '/test';
@@ -26,17 +26,14 @@ const DisciplineTestsConfig = (props) => {
   
   // Editor varibles
   const [editorOpen, setEditorOpen] = useState(false);
-  const [editorData, setEditorData] = useState(null);
 
-  function edit(data) {
-    setProgressId(data.id);
-    setEditorData(data);
+  function edit(id) {
+    setProgressId(id);
     setEditorOpen(true);
   }
 
   function create() {
     setProgressId(null);
-    setEditorData(null);
     setEditorOpen(true);
   }
 
@@ -94,13 +91,13 @@ const DisciplineTestsConfig = (props) => {
                         el.name,
                         el.time == null ? <AllInclusive/> : <SecondsToRusTime time={el.time} />,
                         el.pass_weight + '%',
-                        el.attempts || <AllInclusive/>,
+                        el.max_attempts || <AllInclusive/>,
                         <DateToRusTime time={el.updated_at || el.created_at}/>,
                         <div style={{ display: "flex" }}>
                           <IconButton
                             color={"primary"}
                             onClick={() => {
-                              edit({ id });
+                              edit(id);
                             }}
                             disabled={progressId}
                           >
@@ -133,14 +130,14 @@ const DisciplineTestsConfig = (props) => {
         <EditModal
           onClose={() => setProgressId(null)}
           onSave={() => setUpdate('silent')}
-          data={editorData}
+          id={progressId}
           route={route}
           open={editorOpen}
           setOpen={setEditorOpen}
         />
         {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
         <div style={{ position: "fixed", right: 0, bottom: 0, margin: 30 }}>
-          <Tooltip title="Создать тест" placement="top" arrow>
+          <Tooltip title="Создать лекцию" placement="top" arrow>
             <Fab color="primary" onClick={() => { create() }}>
               <Add />
             </Fab>
@@ -151,4 +148,4 @@ const DisciplineTestsConfig = (props) => {
   );
 };
 
-export default DisciplineTestsConfig;
+export default DisciplineLecturesConfig;
