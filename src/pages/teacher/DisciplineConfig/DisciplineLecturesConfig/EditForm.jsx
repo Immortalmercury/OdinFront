@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Typography } from '@material-ui/core';
 import useStyles from "./styles";
 import Editor from '../../../../components/Editor';
@@ -6,6 +6,7 @@ import SecondsPicker from '../../../../components/SecondsPicker';
 
 const EditForm = ({data, setData, setFormChanged}) => {
   const classes = useStyles();
+  const [initContent, setInitContent] = useState((data && data.content) || null);
 
   return (<>
     <TextField
@@ -34,9 +35,9 @@ const EditForm = ({data, setData, setFormChanged}) => {
     ><span className={classes.editorLabelText}>Содержание лекции</span></Typography>
     <Editor
       withoutN1edScript
-      initialContent={(data && data.content) || null}
+      initialContent={initContent}
       setContent={(e) => {
-        if ((data === null ? null: data.content) !== e)
+        if (initContent !== e)
           setFormChanged(true);
         setData({ ...data, content: e });
       }}

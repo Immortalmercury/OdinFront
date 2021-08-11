@@ -42,6 +42,8 @@ function AdminLayout(props) {
           <Route exact path="/teacher/all_disciplines" component={AllDisciplines} />
           <Route exact path="/teacher/courses/all" component={AllCourses} />
           <Route exact path="/teacher/courses/:id_course" component={CourseConfigLayout} />
+          {/* <Route exact path="/teacher/discipline/:id_discipline/test/:id_test" component={TestQuestionsBank} /> */}
+          {/* <Route exact path="/teacher/test/:id" component={Profile} /> */}
         </Switch>
       </div>
     </div>

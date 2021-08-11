@@ -12,7 +12,8 @@ const EditModal = ({
   open,
   setOpen,
   id = null,
-  route
+  route,
+  id_discipline = null,
 }) => {
   // const classes = useStyles();
   const [data, setData] = useState(null);
@@ -34,8 +35,8 @@ const EditModal = ({
   function close(success = false) {
     if (success) onSave();
     setFormChanged(false);
-    setOpen(false);
     onClose();
+    setOpen(false);
   }
 
   const saveButton = (
@@ -66,7 +67,7 @@ const EditModal = ({
           close();
           return true;
         }}
-        width="md"
+        width="sm"
         open={open}
         setOpen={setOpen}
         noOpenButton
@@ -85,14 +86,14 @@ const EditModal = ({
       />
       {id === null ? (
         <>
-          <EditForm data={data} setData={setData} setFormChanged={setFormChanged}/>
+          <EditForm data={data} setData={setData} setFormChanged={setFormChanged} id_discipline={id_discipline}/>
           {saveButton}
         </>
       ) : (
         <Section update={update} setUpdate={setUpdate} setData={setData}
           request={id === null ? null : { route: route + '/' + id }}
         >
-          <EditForm data={data} setData={setData} setFormChanged={setFormChanged}/>
+          <EditForm data={data} setData={setData} setFormChanged={setFormChanged} id_discipline={id_discipline}/>
           {saveButton}
         </Section>
       )}

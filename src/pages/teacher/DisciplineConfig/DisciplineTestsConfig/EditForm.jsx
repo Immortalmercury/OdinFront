@@ -92,6 +92,7 @@ const EditForm = ({data, setData, setFormChanged}) => {
             <MenuItem value={'not'}>Не показывать</MenuItem>
             <MenuItem value={'mark'}>Показывать только правильность ответа (оценку за вопрос)</MenuItem>
             <MenuItem value={'answer'}>Показывать правильный ответ и оценку за вопрос</MenuItem>
+            <MenuItem value={'description'}>Показывать правильный ответ, оценку и обоснование</MenuItem>
         </TextField>
       </Grid>
       <Grid item direction="column" xs={6} style={{ display: "flex" }}>

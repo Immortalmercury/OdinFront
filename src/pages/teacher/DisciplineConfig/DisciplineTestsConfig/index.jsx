@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IconButton, Tooltip, CircularProgress, Fab } from "@material-ui/core";
-import { Add, AllInclusive, Delete, Edit } from "@material-ui/icons";
+import { Add, AllInclusive, Delete, Edit, Forward } from "@material-ui/icons";
 import useStyles from "./styles";
 import EditModal from './EditModal';
 import API from "../../../../services/API";
@@ -102,6 +102,16 @@ const DisciplineLecturesConfig = (props) => {
                             disabled={progressId}
                           >
                             <Tooltip title="Редактировать" placement="top" arrow><Edit /></Tooltip>
+                          </IconButton>
+                          <IconButton
+                            color={"primary"}
+                            className={classes.B4}
+                            onClick={() => {
+                              props.history.push('../test/' + id);
+                            }}
+                            disabled={progressId}
+                          >
+                            <Tooltip title="Перейти в раздел теста" placement="top" arrow><Forward /></Tooltip>
                           </IconButton>
                           {deleteAllowed && (
                             <IconButton

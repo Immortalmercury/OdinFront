@@ -34,8 +34,8 @@ const EditModal = ({
   function close(success = false) {
     if (success) onSave();
     setFormChanged(false);
-    setOpen(false);
     onClose();
+    setOpen(false);
   }
 
   const saveButton = (
