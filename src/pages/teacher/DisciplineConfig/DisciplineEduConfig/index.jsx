@@ -12,6 +12,7 @@ import DateToRusTime from "../../../../components/DateToRusTime";
 import EditTest from "../DisciplineTestsConfig/EditModal";
 import EditLecture from "../DisciplineLecturesConfig/EditModal";
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import { Helmet } from "react-helmet";
 
 const DisciplineLecturesConfig = (props) => {
   const classes = useStyles();
@@ -65,6 +66,7 @@ const DisciplineLecturesConfig = (props) => {
 
   return (
     <>
+      <Helmet title="Учебная программа" />
       <Section update={update} setUpdate={setUpdate} noDataAllowed
         setData={(data) => {
           setData(data);
@@ -107,7 +109,7 @@ const DisciplineLecturesConfig = (props) => {
                     newData.push([
                       index + 1,
                       (el.instance === 'test'
-                        ? (el.item.parameters.test_type === "selfСontrol" ?
+                        ? (el.item?.parameters?.test_type === "selfСontrol" ?
                         <AssignmentTurnedIn/> : <Ballot />)
                         : <MenuBook />),
                       el.item.name,
@@ -150,7 +152,7 @@ const DisciplineLecturesConfig = (props) => {
                               color={"primary"}
                               className={classes.B4}
                               onClick={() => {
-                                props.history.push('../test/' + id);
+                                props.history.push('./test/' + id);
                               }}
                               disabled={progressId}
                             >

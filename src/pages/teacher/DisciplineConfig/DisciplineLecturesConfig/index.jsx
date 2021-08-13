@@ -9,6 +9,8 @@ import Section from "../../../../components/Section";
 import SecondsToRusTime from "../../../../components/SecondsToRusTime";
 import SecureOptionSwitcher from '../../../../components/SecureOptionSwitcher';
 import DateToRusTime from "../../../../components/DateToRusTime";
+import { Helmet } from "react-helmet";
+import RequestV2Button from "../../../../components/Buttons/RequestV2Button";
 
 const DisciplineLecturesConfig = (props) => {
   const classes = useStyles();
@@ -48,6 +50,7 @@ const DisciplineLecturesConfig = (props) => {
 
   return (
     <>
+      <Helmet title="Лекции" />
       <Section update={update} setUpdate={setUpdate} noDataAllowed
         setData={(data) => {
           setData(data);
@@ -90,6 +93,20 @@ const DisciplineLecturesConfig = (props) => {
                         <SecondsToRusTime time={el.time} />,
                         <DateToRusTime time={el.updated_at || el.created_at}/>,
                         <div style={{ display: "flex" }}>
+                          <RequestV2Button
+                            buttonType="IconButton"
+                            variant="contained"
+                            margin="normal"
+                            color="primary"
+                            // className={classes.B5}
+                            icon={<Add/>}
+                            request={{
+                              method: 'POST',
+                              route: '/discipline/'+id_discipline+'/edu',
+                              data: {instance:'lecture',instance_element_id: id}
+                            }}
+                            label={"Добавить в учебную программу"}
+                          />
                           <IconButton
                             color={"primary"}
                             onClick={() => {

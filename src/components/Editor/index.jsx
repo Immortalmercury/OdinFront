@@ -4,7 +4,7 @@ import 'tinymce/tinymce';
 import 'tinymce/icons/default';
 import 'tinymce/themes/silver';
 import 'tinymce/plugins/paste';
-import 'tinymce/plugins/n1ed'; 
+import 'tinymce/plugins/n1ed';
 import 'tinymce/plugins/link';
 import 'tinymce/plugins/image'; 
 import 'tinymce/plugins/table';
@@ -14,6 +14,8 @@ import "tinymce/skins/ui/material-outlined/skin.min.css";
 // import 'tinymce/skins/ui/oxide/content.min.css';
 // import 'tinymce/skins/content/default/content.min.css';
 import { Editor as TinyMCE } from '@tinymce/tinymce-react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const Editor = ({ initialContent, setContent, debug = false, withoutN1edScript = false }) => {
   
@@ -29,7 +31,7 @@ const Editor = ({ initialContent, setContent, debug = false, withoutN1edScript =
   };
   
   return (<>
-    <TinyMCE
+    {/* <TinyMCE
       initialValue={initialContent}
       apiKey='OSZMDFLT'
       init={{
@@ -43,12 +45,19 @@ const Editor = ({ initialContent, setContent, debug = false, withoutN1edScript =
           'insertdatetime media table paste code help wordcount',
           // 'n1ed'
         ],
-        apiKey: "OSZMDFLT",
+        apiKey: "OSZMDFLT", 
         toolbar:
           'undo redo | formatselect | bold italic textcolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
       }}
       value={text}
       onEditorChange={handleEditorChange}
+    /> */}
+    <CKEditor editor={ClassicEditor}
+      data={text}
+      onChange={ ( event, editor ) => {
+        const editorData = editor.getData();
+        handleEditorChange(editorData);
+      } }
     />
   </>);
 }

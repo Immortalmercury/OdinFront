@@ -20,6 +20,7 @@ import MuiTable from "../../../../components/MuiTable";
 import useStyles from "./styles";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import AddTeacherModal from "./AddTeacherModal";
+import { Helmet } from "react-helmet";
 
 const switcherParams = {
   style: {
@@ -129,6 +130,7 @@ const DisciplineMainConfigs = (props) => {
 
   return (
     <>
+      <Helmet title="Преподаватели" />
       {loading ? (
         <LoadingPage />
       ) : (

@@ -8,6 +8,7 @@ import useStyles from "./styles";
 import UploadFileButton from "../../../../components/FileButtons/UploadFileButton";
 import MuiTable from "../../../../components/MuiTable";
 import { CircularProgress } from "@material-ui/core";
+import { Helmet } from "react-helmet";
 
 const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
   ",",
@@ -78,6 +79,7 @@ const DisciplineResources = (props) => {
 
   return (
     <>
+      <Helmet title="Ресурсы" />
       {loading ? (
         <LoadingPage />
       ) : (

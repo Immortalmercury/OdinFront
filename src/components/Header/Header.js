@@ -15,7 +15,7 @@ export default function Header(props) {
 
   return (<>
     {props.title !== 'Загрузка' && (<Helmet title={props.title} />)}
-    <AppBar position="fixed" color={"primary"} className={classes.appBar}>
+    <AppBar position="fixed" color={"primary"} className={classes.appBar} style={props.style && props.style}>
       <Toolbar className={classes.toolbar}>
         <IconButton
           color="inherit"

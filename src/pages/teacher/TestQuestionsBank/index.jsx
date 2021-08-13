@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { IconButton, Tooltip, CircularProgress, Fab } from "@material-ui/core";
-import { Add, AllInclusive, Delete, Edit, Forward } from "@material-ui/icons";
+import { Add, AllInclusive, CheckBox, Delete, Edit, Forward, RadioButtonChecked } from "@material-ui/icons";
 import useStyles from "./styles";
 import EditModal from './EditModal';
-import API from "../../../../services/API";
-import MuiTable from "../../../../components/MuiTable";
-import Section from "../../../../components/Section";
-import SecondsToRusTime from "../../../../components/SecondsToRusTime";
-import SecureOptionSwitcher from '../../../../components/SecureOptionSwitcher';
-import DateToRusTime from "../../../../components/DateToRusTime";
-import { Helmet } from "react-helmet";
-import RequestV2Button from "../../../../components/Buttons/RequestV2Button";
+import API from "../../../services/API";
+import MuiTable from "../../../components/MuiTable";
+import Section from "../../../components/Section";
+import SecondsToRusTime from "../../../components/SecondsToRusTime";
+import SecureOptionSwitcher from '../../../components/SecureOptionSwitcher';
+import DateToRusTime from "../../../components/DateToRusTime";
+import Header from "../../../components/Header/Header";
+import HiddenValue from './../../../components/HiddenValue/index';
 
-const DisciplineLecturesConfig = (props) => {
+const TestQuestionsBank = (props) => {
   const classes = useStyles();
+  const id_test = props.match.params.id_test;
   const id_discipline = props.match.params.id_discipline;
-  const route = "/discipline/" + id_discipline + '/test';
+  const route = "/test/" + id_test + '/question';
 
   // Section
   const [data, setData] = useState(null);
@@ -48,9 +49,30 @@ const DisciplineLecturesConfig = (props) => {
     });
   };
 
+  const [testData, setTestData] = useState(false);
+
   return (
-    <>
-      <Helmet title="Тесты" />
+    <div style={{
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      minHeight: '100%',
+      width: '100%',
+      zIndex: 1100,
+      padding: 10,
+      paddingTop: 74,
+      backgroundColor: '#F6F7FF',
+    }}>
+      <Section noDataAllowed
+        setData={setTestData}
+        request={{route:"/discipline/" + id_discipline + '/test/'+ id_test}}
+      >
+        <Header
+          history={props.history}
+          title={"Банк вопросов" + (testData ? ' - Тест "' + testData.name + '"' : null)}
+          style={{left:0,width:'100vw'}}
+        />
+      </Section>
       <Section update={update} setUpdate={setUpdate} noDataAllowed
         setData={(data) => {
           setData(data);
@@ -58,9 +80,10 @@ const DisciplineLecturesConfig = (props) => {
         }}
         request={{route}}
       >
+        
         <div style={{ paddingBottom: 10 }}>
           <SecureOptionSwitcher
-            label={"Удаление тестов"}
+            label={"Удаление вопросов"}
             passwordValue={confirmationPassword}
             setPasswordValue={setConfirmationPassword}
             allowed={deleteAllowed}
@@ -68,17 +91,18 @@ const DisciplineLecturesConfig = (props) => {
           />
         </div>
         <MuiTable
-          title="Список тестов"
+          title="Список вопросов"
           columns={[
-            "№ (ID)",
-            "Название",
+            "ID",
+            "Вопрос",
+            "Тип ответа",
+            "Варианты ответа",
+            "Обязателен",
             "Время",
-            "Порог",
-            "Попыток",
-            "Изменен",
+            "Стоимость",
             "Действия",
           ]}
-          noMatch={"Нет тестов"}
+          noMatch={"Нет вопросов"}
           data={
             !data 
               ? []
@@ -87,30 +111,17 @@ const DisciplineLecturesConfig = (props) => {
                   if (data !== null)
                     for (let index = 0; index < data.length; index++) {
                       const el = data[index];
-                      const id = el.id_test;
+                      const id = el.id_question;
 
                       newData.push([
-                        index + 1 + " (ID" + id + ")",
-                        el.name,
-                        el.time == null ? <AllInclusive/> : <SecondsToRusTime time={el.time} />,
-                        el.pass_weight + '%',
-                        el.max_attempts || <AllInclusive/>,
+                        id,
+                        <div dangerouslySetInnerHTML={{__html:el.text}}/>,
+                        el.id_type === 1 ? <RadioButtonChecked /> : <CheckBox />,
+                        <HiddenValue label="Email" text={el.answers} />,
+                        el.required ? "Да" : "Нет",
+                        el.time === null ? "-":<SecondsToRusTime time={el.time}/>,
                         <DateToRusTime time={el.updated_at || el.created_at}/>,
                         <div style={{ display: "flex" }}>
-                          <RequestV2Button
-                            buttonType="IconButton"
-                            variant="contained"
-                            margin="normal"
-                            color="primary"
-                            // className={classes.B5}
-                            icon={<Add/>}
-                            request={{
-                              method: 'POST',
-                              route: '/discipline/'+id_discipline+'/edu',
-                              data: {instance:'test',instance_element_id: id}
-                            }}
-                            label={"Добавить в учебную программу"}
-                          />
                           <IconButton
                             color={"primary"}
                             onClick={() => {
@@ -119,16 +130,6 @@ const DisciplineLecturesConfig = (props) => {
                             disabled={progressId}
                           >
                             <Tooltip title="Редактировать" placement="top" arrow><Edit /></Tooltip>
-                          </IconButton>
-                          <IconButton
-                            color={"primary"}
-                            className={classes.B4}
-                            onClick={() => {
-                              props.history.push('./test/' + id);
-                            }}
-                            disabled={progressId}
-                          >
-                            <Tooltip title="Перейти в раздел теста" placement="top" arrow><Forward /></Tooltip>
                           </IconButton>
                           {deleteAllowed && (
                             <IconButton
@@ -164,15 +165,15 @@ const DisciplineLecturesConfig = (props) => {
         />
         {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
         <div style={{ position: "fixed", right: 0, bottom: 0, margin: 30 }}>
-          <Tooltip title="Создать лекцию" placement="top" arrow>
+          <Tooltip title="Создать вопрос" placement="top" arrow>
             <Fab color="primary" onClick={() => { create() }}>
               <Add />
             </Fab>
           </Tooltip>
         </div>
       </Section>
-    </>
+    </div>
   );
 };
 
-export default DisciplineLecturesConfig;
+export default TestQuestionsBank;

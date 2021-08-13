@@ -35,11 +35,10 @@ export default makeStyles(theme => ({
         }
     },
     B5: {
-        backgroundColor: green[500],
-        color: 'white',
-        fontSize: 20,
+        color: green[500],
         '&:hover': {
-            backgroundColor: green[700],
+            color: green[700],
+            backgroundColor: green[100],
         }
     },
     closeButton: {

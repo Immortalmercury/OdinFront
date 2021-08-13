@@ -13,6 +13,8 @@ import DisciplineCourse from "./DisciplineCourse";
 import DisciplineEduConfig from './DisciplineEduConfig/index';
 import DisciplineLecturesConfig from './DisciplineLecturesConfig/index';
 import DisciplineTestsConfig from './DisciplineTestsConfig/index';
+import { useUserState } from "../../../context/UserContext";
+import { Helmet } from 'react-helmet';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,10 +52,27 @@ const getData = async (id_discipline,setData,setLoading) => {
 }
 
 export default function DisciplineConfigLayout(props) {
-  const [tab, setTab] = useState('edu');
   const [data, setData] = useState(null);
+  const urlTab = props.match.params.tab;
+  const [tab, setTab] = useState(null);
   const id_discipline = props.match.params.id_discipline;
   const [loading, setLoading] = useState(true);
+
+  function customSetTab(value) {
+    setTab(value);
+    props.history.push('/teacher/discipline/' + id_discipline + "/" + value);
+  }
+
+  useEffect(() => {
+    if (urlTab !== null && urlTab !== undefined) {
+      setTab(urlTab);
+    } else {
+      customSetTab('edu');
+    }
+    return (() => {
+      setTab(null);
+    });
+  }, [urlTab]);
 
   useEffect(() => {
       getData(id_discipline,setData,setLoading);
@@ -67,8 +86,13 @@ export default function DisciplineConfigLayout(props) {
     setData({...data, exam_forms:forms});
   }
 
-  return (
-    <>
+  var { role } = useUserState();
+  return (<>
+      <Helmet
+        titleTemplate={"%s - " + (loading&&!data ? 'Загрузка' : data.description+" (Конфигурации) - ") +
+          (role === 'teacher' ? "Преподаватель":"Администратор") +
+          " - СДО АУЦ ФПЛС"}
+      />
       <Header history={props.history} title={loading&&!data ? 'Загрузка' : data.description+" (Конфигурации)"} />
       {loading ? (<LoadingPage />) : (<>
         
@@ -77,7 +101,7 @@ export default function DisciplineConfigLayout(props) {
             <Tabs
               value={tab}
               onChange={(e, newValue) => {
-                setTab(newValue);
+                customSetTab(newValue);
               }}
               indicatorColor="primary"
               textColor="primary"

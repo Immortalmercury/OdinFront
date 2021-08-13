@@ -13,7 +13,7 @@ const Section = ({
   requestData,
   request,
   setData,
-  update,
+  update = null,
   setUpdate = null,
   timerDecoration = null,
   debug = false,

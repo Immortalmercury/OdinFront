@@ -117,7 +117,7 @@ export default function RequestV2Button({
                   disabled={loading}
                   className={iconButtonClassname}
                   onClick={() => {
-                    request();
+                    makeRequest();
                   }}
                   {...props}
                 >
