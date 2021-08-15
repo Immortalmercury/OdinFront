@@ -6,6 +6,7 @@ import Themes from "./themes";
 import { CssBaseline } from "@material-ui/core";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./AppRouter"; 
+import { CookiesProvider } from "react-cookie";
 
 import * as serviceWorker from "./serviceWorker";
 import { LayoutProvider } from "./context/LayoutContext";
@@ -16,7 +17,9 @@ ReactDOM.render(
       <ThemeProvider theme={Themes.purple}>
         <CssBaseline />
         <BrowserRouter>
-          <AppRouter />
+          <CookiesProvider>
+            <AppRouter />
+          </CookiesProvider>
         </BrowserRouter>
       </ThemeProvider>
     </UserProvider>

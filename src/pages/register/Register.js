@@ -215,7 +215,7 @@ function Register(props) {
                 
                 <Logo type={activeStep === 0 ? "simple" : "inline"} className={classnames({
                   [classes.logo]: activeStep>0,
-                })} />
+                })}/>
                 
                
               </div>
@@ -250,7 +250,10 @@ function Register(props) {
                   </Stepper>
                 )}
                 {activeStep === 0 && (
-                  <>
+                    <>
+                    <Typography align="center" variant='h4'  style={{marginTop:'0.35em'}}>
+                      Регистрация
+                    </Typography>
                     <TextField
                       onChange={(e) => {
                         setInviteCode(e.target.value);
@@ -290,7 +293,26 @@ function Register(props) {
                           Продолжить
                         </Button>
                         )}
-                    </div>
+                      </div>
+                      <Typography align="center" color='textSecondary' variant='body1'
+                        style={{
+                          margin: "5px 0",
+                          paddingBottom: 10,
+                          fontSize: '0.75rem',
+                          fontWeight: '400',
+                          lineHeight: '1.66',
+                        }}
+                      >
+                        
+                        Нажимая кнопку «Продолжить», вы <br/>принимаете&nbsp; 
+                        <a href="https://api.aucfpls.ru/storage/documents/agreement.pdf"
+                          target="blank" style={{ whiteSpace: 'nowrap', color: '#6E6E6E' }}
+                        >пользовательское соглашение</a><br/>
+                        &nbsp;и&nbsp;
+                        <a href="https://api.aucfpls.ru/storage/documents/policy.pdf"
+                          target="blank" style={{ whiteSpace: 'nowrap', color: '#6E6E6E' }}
+                        >политику конфиденциальности</a>.
+                      </Typography>
                       {!isLoading && (
                         <Button
                           style={{

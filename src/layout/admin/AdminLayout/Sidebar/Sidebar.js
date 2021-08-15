@@ -57,14 +57,14 @@ const structureAdmin = [
   { id: 11, type: "title", label: "Администрирование" },
   { id: 9, label: "Пользователи", link: "/teacher/users", icon: <PermIdentity /> },   
   { id: 12, label: "Все дисциплины", link: "/teacher/all_disciplines", icon: <ViewListIcon /> },  
-  { id: 12, label: "Все курсы", link: "/teacher/courses/all", icon: <ViewListIcon /> },  
+  { id: 13, label: "Все курсы", link: "/teacher/courses/all", icon: <ViewListIcon /> },  
 ];
 
 const getData = async (setData, setIsLoading) => {
   setIsLoading(true);
   await API.call({method: "get_user_data",}).then(result => {
     if (result.success) {
-      console.log(result.data);
+      // console.log(result.data);
       setData(result.data);
     }
     setIsLoading(false);
@@ -115,7 +115,7 @@ function Sidebar({ location, currentSemester, history }) {
             <Button variant="outlined" color="default" size="small" className={classes.profile_btn2}
               onClick={e => {history.push('/teacher/profile')}}
             >Профиль</Button>
-            <Button variant="outlined" color="error" size="small" className={classes.exit_btn}
+            <Button variant="outlined" color="inherit" size="small" className={classes.exit_btn}
               onClick={() => logoutUser(userDispatch,history)}
             >Выход</Button>
           </div>

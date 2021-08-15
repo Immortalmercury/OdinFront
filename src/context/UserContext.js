@@ -70,11 +70,11 @@ export { UserProvider, useUserState, useUserDispatch, loginUser, logoutUser };
 function loginUser(dispatch, login, password, remember, history, setIsLoading, setError,setAttemptLimit) {
   setError(false);
   setIsLoading(true);
-  console.log(login.toString().lenght);
-  console.log(password.toString().lenght);
+  // console.log(login.toString().lenght);
+  // console.log(password.toString().lenght);
   if (!!login && !!password ) {
     API.login(login, password, remember).then(result => {
-      console.log(result);
+      // console.log(result);
       setIsLoading(false);
       if (result.success) {
         dispatch({ type: result.status })
@@ -95,7 +95,7 @@ function loginUser(dispatch, login, password, remember, history, setIsLoading, s
 
 function logoutUser(dispatch, history) {
   API.logout().then((result) => {
-    console.log(result);
+    // console.log(result);
     if (result.success) { 
       dispatch({ type: result.status });
       history.push("/login");

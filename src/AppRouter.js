@@ -12,10 +12,11 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 
 // context
-import { useUserDispatch, useUserState } from "./context/UserContext"; 
+import { useUserDispatch, useUserState } from "./context/UserContext";
 import { refreshTokens } from "./services/JWT";
 import Centered from "./components/Centered";
 import { CircularProgress } from "@material-ui/core";
+import WeUseCookieMessage from './components/WeUseCookieMessage/index';
 
 export default function App() {
   // global
@@ -38,6 +39,7 @@ export default function App() {
       defaultTitle="Odin Laboratory"
       titleTemplate="%s - СДО АУЦ ФПЛС"
     />
+    <WeUseCookieMessage/>
     <Switch>
       <Route exact path="/" render={() => <Redirect to="/student" />} />
       <Route exact path="/admin" render={() => <Redirect to="/teacher" />} />
