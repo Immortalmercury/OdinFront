@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IconButton, Tooltip, CircularProgress, Fab } from "@material-ui/core";
-import { Add, AllInclusive, CheckBox, Delete, Edit, Forward, RadioButtonChecked } from "@material-ui/icons";
-import useStyles from "./styles";
+import { Add, CheckBox, Delete, Edit, RadioButtonChecked } from "@material-ui/icons";
+import useStyles from "./styles"; 
 import EditModal from './EditModal';
 import API from "../../../services/API";
 import MuiTable from "../../../components/MuiTable";

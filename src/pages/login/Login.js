@@ -51,9 +51,9 @@ function Login(props) {
   var userDispatch = useUserDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [loginValue, setLoginValue] = useState("ayo");
+  const [loginValue, setLoginValue] = useState("");
   const [remember, setRemember] = useState(false);
-  const [passwordValue, setPasswordValue] = useState("password");
+  const [passwordValue, setPasswordValue] = useState("");
   const [showPasswordValue, setShowPasswordValue] = useState(false);
 
   const [attemptLimit, setAttemptLimit] = useState(getLimit());

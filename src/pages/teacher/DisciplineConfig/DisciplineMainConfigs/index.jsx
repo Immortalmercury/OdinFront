@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
+// import FormHelperText from "@material-ui/core/FormHelperText";
 import Switch from "@material-ui/core/Switch";
 import LoadingPage from "../../../../components/Loading";
 import API from "../../../../services/API";
@@ -77,6 +77,7 @@ const DisciplineMainConfigs = (props) => {
 
   const appendTeacher = (newValues) => {
     let newData = newValues;
+    // eslint-disable-next-line array-callback-return
     Object.entries(data.teachers_data).map((e) => {
       newData.push(e[1]);
     });
@@ -126,6 +127,7 @@ const DisciplineMainConfigs = (props) => {
 
   useEffect(() => {
     loadData(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

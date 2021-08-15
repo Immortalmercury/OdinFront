@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
-import { red,common, grey } from '@material-ui/core/colors';
+import { red, grey } from '@material-ui/core/colors';
 
 const drawerWidth = 320;
 const backgroundClr = '#2C2C2C';

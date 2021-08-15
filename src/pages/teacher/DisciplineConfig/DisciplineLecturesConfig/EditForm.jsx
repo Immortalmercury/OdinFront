@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextField, Typography } from '@material-ui/core';
 import useStyles from "./styles";
 import Editor from '../../../../components/Editor';
@@ -6,7 +6,7 @@ import SecondsPicker from '../../../../components/SecondsPicker';
 
 const EditForm = ({data, setData, setFormChanged}) => {
   const classes = useStyles();
-  const [initContent, setInitContent] = useState((data && data.content) || null);
+  const initContent = (data && data.content) || null;
 
   return (<>
     <TextField

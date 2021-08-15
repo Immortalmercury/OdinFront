@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 import {
   Card,
   CardContent,
@@ -46,14 +46,14 @@ import { Badge } from "@material-ui/core";
 // import API from "../../services/API";
 // import LoadingPage from "./../Loading/index";
 // import Notification from "./../Notification/Notification";
-import CloseIcon from "@material-ui/icons/Close";
+// import CloseIcon from "@material-ui/icons/Close";
 import { logoutUser, useUserDispatch } from "../../../../context/UserContext";
 import { useLayoutDispatch } from "../../../../context/LayoutContext";
 import API from "../../../../services/API";
 // import Notification from './../../../../components/Notification/Notification';
 import Logo from './../../../../components/Logo/index';
 import LoadingPage from "../../../../components/Loading";
-import Notification from './../../../../components/Notification/Notification';
+// import Notification from './../../../../components/Notification/Notification';
 
 function SemesterIcon(num) {
   switch (num) {
@@ -136,7 +136,7 @@ function Sidebar({ location, history }) {
     };
   }, []);
 
-  const timer = React.useRef();
+  // const timer = React.useRef();
 
   // ! Включает(true)/Выключает(false) получение новых уведомлений
   // const [timerRuns, setTimerRuns] = useState(false);

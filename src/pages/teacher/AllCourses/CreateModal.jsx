@@ -40,9 +40,9 @@ const convertData = (data) => {
 
 const CreateModal = ({ setRerender }) => {
   const [invitationModal, setInvitationModal] = useState(false);
-  const [invitationsCount, setInvitationsCount] = useState(0);
+  // const [invitationsCount, setInvitationsCount] = useState(0);
   const [group, setGroup] = useState("");
-  const [admissionYear, setAdmissionYear] = useState(new Date().getFullYear());
+  // const [admissionYear, setAdmissionYear] = useState(new Date().getFullYear());
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);

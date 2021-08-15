@@ -1,10 +1,10 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from "react";
 import { Grid, IconButton, Tooltip } from "@material-ui/core";
-import MUIDataTable from "mui-datatables";
+// import MUIDataTable from "mui-datatables";
 import API from "../../../../services/API";
 import LoadingPage from "../../../../components/Loading";
-import { Add, Archive, Delete, Description, GetApp } from "@material-ui/icons";
+import { Delete, GetApp } from "@material-ui/icons";
 import useStyles from "./styles";
 import UploadFileButton from "../../../../components/FileButtons/UploadFileButton";
 import MuiTable from "../../../../components/MuiTable";
@@ -16,7 +16,6 @@ import CreateLabModal from "./CreateLabModal";
 const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
   ",",
 );
-const convertData = (data, classes, discipline, setRerender) => {};
 
 const DisciplineLabsConfig = (props) => {
   const classes = useStyles();
@@ -103,6 +102,7 @@ const DisciplineLabsConfig = (props) => {
       setData(null);
       setLoading(true);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

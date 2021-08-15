@@ -9,7 +9,7 @@ import DisciplineMainConfigs from "./DisciplineMainConfigs";
 import DisciplineGroupsConfig from './DisciplineGroupsConfig/index';
 import DisciplineResources from "./DisciplineResources";
 import DisciplineLabsConfig from "./DisciplineLabsConfig";
-import DisciplineCourse from "./DisciplineCourse";
+// import DisciplineCourse from "./DisciplineCourse";
 import DisciplineEduConfig from './DisciplineEduConfig/index';
 import DisciplineLecturesConfig from './DisciplineLecturesConfig/index';
 import DisciplineTestsConfig from './DisciplineTestsConfig/index';
@@ -72,6 +72,7 @@ export default function DisciplineConfigLayout(props) {
     return (() => {
       setTab(null);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlTab]);
 
   useEffect(() => {

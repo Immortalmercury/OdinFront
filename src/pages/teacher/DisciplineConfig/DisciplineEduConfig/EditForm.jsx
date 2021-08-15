@@ -1,8 +1,9 @@
+/* eslint-disable array-callback-return */
 import React from 'react';
-import { TextField, Typography } from '@material-ui/core';
-import useStyles from "./styles";
-import Editor from '../../../../components/Editor';
-import SecondsPicker from '../../../../components/SecondsPicker';
+import { TextField } from '@material-ui/core';
+// import useStyles from "./styles";
+// import Editor from '../../../../components/Editor';
+// import SecondsPicker from '../../../../components/SecondsPicker';
 import { MenuItem } from '@material-ui/core';
 import { FormControlLabel } from '@material-ui/core';
 import { Checkbox } from '@material-ui/core';
@@ -14,7 +15,7 @@ import API from '../../../../services/API';
 // import { withRouter } from 'react-router-dom';
 
 const EditForm = ({data, setData, setFormChanged, id_discipline}) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [elementOptions, setElementOptions] = useState([]);
   const [elementSelectOpen, setElementSelectOpen] = useState(false);
   const elementsLoading = elementSelectOpen && elementOptions.length === 0;
@@ -64,6 +65,7 @@ const EditForm = ({data, setData, setFormChanged, id_discipline}) => {
       });
     })();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementsLoading, id_discipline,type]);
 
   useEffect(() => {

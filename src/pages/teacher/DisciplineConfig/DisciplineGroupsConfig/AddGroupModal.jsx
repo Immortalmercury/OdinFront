@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import {
   IconButton,
-  Button,
   Dialog,
   DialogContent,
   Tooltip,
@@ -15,64 +14,64 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+// import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import API from "../../../../services/API";
-import HiddenValue from "../../../../components/HiddenValue";
-import SecondsToRusTime from "../../../../components/SecondsToRusTime";
+// import HiddenValue from "../../../../components/HiddenValue";
+// import SecondsToRusTime from "../../../../components/SecondsToRusTime";
 import MuiTable from "../../../../components/MuiTable";
 import { TextField } from '@material-ui/core';
 
-const convertData = (data, classes, addToGroup, progress) => {
-  let newData = [];
-  if (data !== null)
-    for (let index = 0; index < data.length; index++) {
-      const el = data[index];
-      var last_login =
-        -(new Date(el.last_login) - new Date()) / 1000 - 60 * 60 * 3;
-      newData.push([
-        el.s_name + " " + el.f_name + (el.fth_name ? " " + el.fth_name : ""),
-        <HiddenValue label="Email" text={el.email} />,
-        !el.last_login ? (
-          "Никогда"
-        ) : last_login < 60 ? (
-          <span style={{ color: "green" }}>
-            <FiberManualRecordIcon style={{ height: 12 }} />
-            Онлайн
-          </span>
-        ) : (
-          <>
-            <SecondsToRusTime time={last_login} />
-            {" назад"}
-          </>
-        ),
-        progress ? (
-          <CircularProgress color="primary" size={20} />
-        ) : (
-          <IconButton
-            variant="outlined"
-            color="secondary"
-            className={classes.B2}
-          >
-            <Tooltip title="Включить в группу" placement="top" arrow>
-              <Add
-                onClick={() => {
-                  addToGroup(el.id_user);
-                }}
-              />
-            </Tooltip>
-          </IconButton>
-        ),
-      ]);
-    }
-  return newData;
-};
+// const convertData = (data, classes, addToGroup, progress) => {
+//   let newData = [];
+//   if (data !== null)
+//     for (let index = 0; index < data.length; index++) {
+//       const el = data[index];
+//       var last_login =
+//         -(new Date(el.last_login) - new Date()) / 1000 - 60 * 60 * 3;
+//       newData.push([
+//         el.s_name + " " + el.f_name + (el.fth_name ? " " + el.fth_name : ""),
+//         <HiddenValue label="Email" text={el.email} />,
+//         !el.last_login ? (
+//           "Никогда"
+//         ) : last_login < 60 ? (
+//           <span style={{ color: "green" }}>
+//             <FiberManualRecordIcon style={{ height: 12 }} />
+//             Онлайн
+//           </span>
+//         ) : (
+//           <>
+//             <SecondsToRusTime time={last_login} />
+//             {" назад"}
+//           </>
+//         ),
+//         progress ? (
+//           <CircularProgress color="primary" size={20} />
+//         ) : (
+//           <IconButton
+//             variant="outlined"
+//             color="secondary"
+//             className={classes.B2}
+//           >
+//             <Tooltip title="Включить в группу" placement="top" arrow>
+//               <Add
+//                 onClick={() => {
+//                   addToGroup(el.id_user);
+//                 }}
+//               />
+//             </Tooltip>
+//           </IconButton>
+//         ),
+//       ]);
+//     }
+//   return newData;
+// };
 
 const AddGroupModal = ({ appendDataCallback, discipline }) => {
   const [open, setOpen] = useState(false);
   const [addGroupId, setAddGroupId] = useState(false);
   const [addGroupProgress, setAddGroupProgress] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const [data, setData] = useState(false);
   const classes = useStyles();
   let now = new Date();
@@ -84,7 +83,7 @@ const AddGroupModal = ({ appendDataCallback, discipline }) => {
   const addGroup = async (group) => {
     setAddGroupProgress(true);
     setAddGroupId(group);
-    setError(false);
+    // setError(false);
     await API.call({
       method: "add_group_to_discipline",
       discipline,
@@ -98,7 +97,7 @@ const AddGroupModal = ({ appendDataCallback, discipline }) => {
           await loadData(false);
         })();
       } else {
-        setError(result.message);
+        // setError(result.message);
       }
     });
   };
@@ -114,7 +113,7 @@ const AddGroupModal = ({ appendDataCallback, discipline }) => {
         console.log(result.data);
         setData(result.data);
       } else {
-        setError(result.message);
+        // setError(result.message);
       }
       setAddGroupId(false);
       setAddGroupProgress(false);
@@ -125,6 +124,7 @@ const AddGroupModal = ({ appendDataCallback, discipline }) => {
     if (open) {
       loadData(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (

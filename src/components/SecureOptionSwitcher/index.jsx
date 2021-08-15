@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   IconButton,
   Button,
@@ -8,15 +8,15 @@ import {
   Switch,
   InputAdornment,
 } from "@material-ui/core";
-import { Add, Visibility, VisibilityOff } from "@material-ui/icons";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+// import Autocomplete from "@material-ui/lab/Autocomplete";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import API from "../../services/API";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
-import MuiTable from "../MuiTable";
+// import MuiTable from "../MuiTable";
 import { FormControlLabel } from "@material-ui/core";
 
 const SecureOptionSwitcher = ({

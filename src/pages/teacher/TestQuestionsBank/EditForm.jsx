@@ -1,30 +1,13 @@
-import React from 'react';
-import { TextField, Typography, FormGroup, Grid, Switch } from '@material-ui/core';
-import useStyles from "./styles";
-import Editor from '../../../components/Editor';
+import React,{ useEffect, useState } from 'react';
+import { TextField, Typography, MenuItem, FormLabel, FormControlLabel, Checkbox, IconButton, Grid } from '@material-ui/core';
+import { Add, Cancel, Edit, Check, Delete } from '@material-ui/icons';
 import SecondsPicker from '../../../components/SecondsPicker';
-import { MenuItem } from '@material-ui/core';
-import { FormControl } from '@material-ui/core';
-import { FormLabel } from '@material-ui/core';
-import { FormControlLabel } from '@material-ui/core';
-import { Checkbox } from '@material-ui/core';
-import { useState } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { IconButton } from '@material-ui/core';
-// import { useForm, Controller } from "react-hook-form";
-import { Add, Cancel, Edit } from '@material-ui/icons';
-import { Check } from '@material-ui/icons';
-import { useEffect } from 'react';
-import { Delete } from '@material-ui/icons';
-import { Button } from '@material-ui/core';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import useStyles from "./styles";
 
 const EditForm = ({data, setData, setFormChanged}) => {
   const classes = useStyles();
-
-  const initialContent = "123";
-  const [content, setContent] = useState(null);
-  const [variants, setVariants] = useState(1);
 
   const Field = ({value,onChange}) => {
     const [edit, setEdit] = useState(false);

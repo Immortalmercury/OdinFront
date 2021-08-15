@@ -11,10 +11,10 @@ import React, { useEffect, useState } from "react";
 // import CreateThemeModal from "./CreateThemeModal";
 
 const DisciplineCourse = (props) => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(null);
-  const [passwordForDelete, setPasswordForDelete] = useState("");
-  const [deleteAllowed, setDeleteAllowed] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [data, setData] = useState(null);
+  // const [passwordForDelete, setPasswordForDelete] = useState("");
+  // const [deleteAllowed, setDeleteAllowed] = useState(false);
   const [rerender, setRerender] = useState(false);
   // const classes = useStyles();
 
@@ -33,8 +33,8 @@ const DisciplineCourse = (props) => {
   useEffect(() => {
     // getData(setData, setLoading);
     return () => {
-      setData(null);
-      setLoading(true);
+      // setData(null);
+      // setLoading(true);
       setRerender(false);
     };
   }, [rerender]);

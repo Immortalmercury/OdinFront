@@ -1,88 +1,89 @@
-/* eslint-disable array-callback-return */
+/* eslint-disable array-callback-return */ 
 // import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import ruLocale from "date-fns/locale/ru";
-import {
-  KeyboardDateTimePicker,
-  DateTimePicker,
-  DatePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import React, { useState, useEffect } from "react";
-import {
-  IconButton,
-  Button,
-  Dialog,
-  DialogContent,
-  TextField,
-  Tooltip,
-  Fab,
-  Checkbox,
-} from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { Typography } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import useStyles from "./styles";
-import { Add, Publish } from "@material-ui/icons";
-import UploadFileButton from "../../../../components/FileButtons/UploadFileButton";
-import API from "../../../../services/API";
-import AttachmentIcon from '@material-ui/icons/Attachment';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
-import { FormControlLabel } from "@material-ui/core";
-import RequestButton from '../../../../components/FileButtons/RequestButton';
+// import DateFnsUtils from '@date-io/date-fns';
+// import ruLocale from "date-fns/locale/ru";
+// import {
+//   KeyboardDateTimePicker,
+//   DateTimePicker,
+//   DatePicker,
+//   MuiPickersUtilsProvider,
+// } from '@material-ui/pickers';
+// import React, { useState, useEffect } from "react";
+// import {
+//   IconButton,
+//   Button,
+//   Dialog,
+//   DialogContent,
+//   TextField,
+//   Tooltip,
+//   Fab,
+//   Checkbox,
+// } from "@material-ui/core";
+// import CircularProgress from "@material-ui/core/CircularProgress";
+// import DialogTitle from "@material-ui/core/DialogTitle";
+// import { Typography } from "@material-ui/core";
+// import CloseIcon from "@material-ui/icons/Close";
+// import useStyles from "./styles";
+// import { Add, Publish } from "@material-ui/icons";
+// import UploadFileButton from "../../../../components/FileButtons/UploadFileButton";
+// import API from "../../../../services/API";
+// import AttachmentIcon from '@material-ui/icons/Attachment';
+// import AttachFileIcon from '@material-ui/icons/AttachFile';
+// import { FormControlLabel } from "@material-ui/core";
+// import RequestButton from '../../../../components/FileButtons/RequestButton';
 
-const getInvitations = async (
-  discipline,
-  role,
-  group,
-  setData,
-  setIsLoading,
-  setError,
-) => {
-  setIsLoading(true);
-  setError(false);
-  await API.call({
-    method: "get_config",
-    discipline,
-    group,
-  }).then((result) => {
-    setIsLoading(false);
-    if (result.success) {
-      console.log(result.data);
-      setData(result.data);
-    } else {
-      setError(result.message);
-    }
-  });
-};
+// const getInvitations = async (
+//   discipline,
+//   role,
+//   group,
+//   setData,
+//   setIsLoading,
+//   setError,
+// ) => {
+//   setIsLoading(true);
+//   setError(false);
+//   await API.call({
+//     method: "get_config",
+//     discipline,
+//     group,
+//   }).then((result) => {
+//     setIsLoading(false);
+//     if (result.success) {
+//       console.log(result.data);
+//       setData(result.data);
+//     } else {
+//       setError(result.message);
+//     }
+//   });
+// };
+import React from 'react';
 
 const CreateLabModal = ({ appendDataCallback, group }) => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [data, setData] = useState(false);
-  const [openLab, setOpenLab] = useState(false);
-  const [deadlineNeed, setDeadlineNeed] = useState(null);
-  const [deadline, setDeadline] = useState(null);
+  // const classes = useStyles();
+  // const [open, setOpen] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
+  // const [data, setData] = useState(false);
+  // const [openLab, setOpenLab] = useState(false);
+  // const [deadlineNeed, setDeadlineNeed] = useState(null);
+  // const [deadline, setDeadline] = useState(null);
 
-  const [description, setDescription] = useState('');
-  const [comment, setComment] = useState('');
+  // const [description, setDescription] = useState('');
+  // const [comment, setComment] = useState('');
 
-  useEffect(() => {
-    return (() => {
-      setComment('');
-      setDescription('');
-      setOpenLab(false);
-      setDeadlineNeed(null);
-      setDeadline(null);
-    })
-  }, [open]);
+  // useEffect(() => {
+  //   return (() => {
+  //     setComment('');
+  //     setDescription('');
+  //     setOpenLab(false);
+  //     setDeadlineNeed(null);
+  //     setDeadline(null);
+  //   })
+  // }, [open]);
 
   return (
     <>
-      <Tooltip title="Создать лабораторную" placement="top" arrow>
+      {/* <Tooltip title="Создать лабораторную" placement="top" arrow>
         <Fab color="primary" onClick={() => setOpen(true)}>
           <Add />
         </Fab>
@@ -192,7 +193,7 @@ const CreateLabModal = ({ appendDataCallback, group }) => {
             </DialogContent>
           )}
         </Dialog>
-      )}
+      )} */}
     </>
   );
 };

@@ -5,18 +5,14 @@ import {
   Button,
   Dialog,
   DialogContent,
-  Fab,
   Tooltip,
   TextField,
 } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
 import API from "../../../../services/API";
-import MuiTable from './../../../../components/MuiTable/index';
 
 const CreateDisciplineModal = ({ course, callback }) => {
   const [invitationModal, setInvitationModal] = useState(false);

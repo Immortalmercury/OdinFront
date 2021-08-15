@@ -1,8 +1,8 @@
 import { Tooltip } from '@material-ui/core';
-import { Typography, IconButton } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
-import { Edit, Email } from '@material-ui/icons';
-import React, { useState, useEffect } from 'react';
+import { Email } from '@material-ui/icons';
+import React, { useState } from 'react';
 import Centered from '../../../components/Centered';
 import Section from './../../../components/Section/index';
 import { Button } from '@material-ui/core';

@@ -1,6 +1,5 @@
 import { grey } from "@material-ui/core/colors";
 import tinycolor from "tinycolor2";
-import cross from './cross-sign.png';
 
 const primary = "#9C27B0";
 const secondary = "#987466"; //c2eabd

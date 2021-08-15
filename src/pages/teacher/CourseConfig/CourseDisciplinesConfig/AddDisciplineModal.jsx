@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import {
   IconButton,
-  Button,
   Dialog,
   DialogContent,
   Tooltip,
@@ -14,41 +13,41 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+// import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import API from "../../../../services/API";
-import HiddenValue from "../../../../components/HiddenValue";
-import SecondsToRusTime from "../../../../components/SecondsToRusTime";
+// import HiddenValue from "../../../../components/HiddenValue";
+// import SecondsToRusTime from "../../../../components/SecondsToRusTime";
 import MuiTable from "../../../../components/MuiTable";
 import CreateDisciplineModal from './CreateDisciplineModal';
 
-const convertData = (data, classes, addToGroup, progress) => {
-  let newData = [];
-  if (data !== null)
-    for (let index = 0; index < data.length; index++) {
-      const el = data[index];
-      var last_login =
-        -(new Date(el.last_login) - new Date()) / 1000 - 60 * 60 * 3;
-      newData.push([
-        el.s_name + " " + el.f_name + (el.fth_name ? " " + el.fth_name : ""),
-        <HiddenValue label="Email" text={el.email} />,
-        !el.last_login ? (
-          "Никогда"
-        ) : last_login < 60 ? (
-          <span style={{ color: "green" }}>
-            <FiberManualRecordIcon style={{ height: 12 }} />
-            Онлайн
-          </span>
-        ) : (
-          <>
-            <SecondsToRusTime time={last_login} />
-            {" назад"}
-          </>
-        ),
+// const convertData = (data, classes, addToGroup, progress) => {
+//   let newData = [];
+//   if (data !== null)
+//     for (let index = 0; index < data.length; index++) {
+//       const el = data[index];
+//       var last_login =
+//         -(new Date(el.last_login) - new Date()) / 1000 - 60 * 60 * 3;
+//       newData.push([
+//         el.s_name + " " + el.f_name + (el.fth_name ? " " + el.fth_name : ""),
+//         <HiddenValue label="Email" text={el.email} />,
+//         !el.last_login ? (
+//           "Никогда"
+//         ) : last_login < 60 ? (
+//           <span style={{ color: "green" }}>
+//             <FiberManualRecordIcon style={{ height: 12 }} />
+//             Онлайн
+//           </span>
+//         ) : (
+//           <>
+//             <SecondsToRusTime time={last_login} />
+//             {" назад"}
+//           </>
+//         ),
         
-      ]);
-    }
-  return newData;
-};
+//       ]);
+//     }
+//   return newData;
+// };
 
 const AddDisciplineModal = ({ appendDataCallback, course }) => {
   const [open, setOpen] = useState(false);
@@ -105,6 +104,7 @@ const AddDisciplineModal = ({ appendDataCallback, course }) => {
     if (open) {
       loadData(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (

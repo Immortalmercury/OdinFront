@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Typography, CircularProgress } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import Centered from "../Centered/index";
-import useCountDown from "react-countdown-hook";
 import { useEffect } from "react";
 import CheckIcon from "@material-ui/icons/Check";
 

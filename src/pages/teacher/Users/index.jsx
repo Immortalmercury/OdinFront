@@ -13,9 +13,9 @@ import MuiTable from "./../../../components/MuiTable/index";
 import HiddenValue from "../../../components/HiddenValue";
 import SecureOptionSwitcher from "../../../components/SecureOptionSwitcher";
 
-const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
-  ",",
-);
+// const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
+//   ",",
+// ); 
 
 const convertData = (tab, data, classes, deleteRequest, passwordForDelete, deleteAllowed) => {
   let newData = [];

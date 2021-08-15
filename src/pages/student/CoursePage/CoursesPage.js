@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Button,
@@ -6,7 +6,6 @@ import {
   CardContent,
   Card,
   CardActionArea,
-  Divider,
 } from "@material-ui/core";
 
 // styles
@@ -14,25 +13,23 @@ import useStyles from "./styles";
 
 import PageTitle from "../../../components/PageTitle/PageTitle";
 import { Typography } from "../../../components/Wrappers/Wrappers";
-import API from "../../../services/API";
-import LoadingPage from '../../../components/Loading';
+// import API from "../../../services/API";
 import Section from '../../../components/Section/index';
-import ProgressCircle from '../../../components/ProgressCircle/index';
 
 
 
-const getData = async (semester_num,setDisciplines,setLoading) => {
-  await API.call({
-    method: "disciplines_by_semester",
-    semester: semester_num,
-  }).then(result => {
-    if (result.success) {
-      console.log(result.data);
-      setDisciplines(result.data);
-    }
-    setLoading(false);
-  });
-}
+// const getData = async (semester_num,setDisciplines,setLoading) => {
+//   await API.call({
+//     method: "disciplines_by_semester",
+//     semester: semester_num,
+//   }).then(result => {
+//     if (result.success) {
+//       console.log(result.data);
+//       setDisciplines(result.data);
+//     }
+//     setLoading(false);
+//   });
+// }
 
 export default function CoursesPage(props) {
   var classes = useStyles();

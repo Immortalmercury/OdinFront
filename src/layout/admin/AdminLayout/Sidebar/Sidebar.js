@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Button, Drawer, IconButton, List } from "@material-ui/core";
-import { Card, CardContent, Typography, Paper } from '@material-ui/core';
+import { Button, Drawer, List } from "@material-ui/core";
+import { Card, CardContent, Typography } from '@material-ui/core';
 
 import {
-  NotificationsNone as NotificationsIcon,
-  FormatSize as TypographyIcon,
-  FilterNone as UIElementsIcon,
-  BorderAll as TableIcon,
-  Filter1 as Semester1Icon,
-  Filter2 as Semester2Icon,
-  Filter3 as Semester3Icon,
-  Filter4 as Semester4Icon,
-  Filter5 as Semester5Icon,
-  Filter6 as Semester6Icon,
-  Filter7 as Semester7Icon,
-  Filter8 as Semester8Icon,
-  Filter9 as Semester9Icon,
-  Filter9Plus as SemesterOtherIcon,
-  ExitToApp,
-  Notifications,
+  // NotificationsNone as NotificationsIcon,
+  // FormatSize as TypographyIcon,
+  // FilterNone as UIElementsIcon,
+  // BorderAll as TableIcon,
+  // Filter1 as Semester1Icon,
+  // Filter2 as Semester2Icon,
+  // Filter3 as Semester3Icon,
+  // Filter4 as Semester4Icon, 
+  // Filter5 as Semester5Icon,
+  // Filter6 as Semester6Icon,
+  // Filter7 as Semester7Icon,
+  // Filter8 as Semester8Icon,
+  // Filter9 as Semester9Icon,
+  // Filter9Plus as SemesterOtherIcon,
+  // ExitToApp,
+  // Notifications,
   Group,
   Dashboard,
-  School,Layers,
+  // School,
+  Layers,
   PermIdentity
 } from "@material-ui/icons";
 import { withRouter } from "react-router-dom";
@@ -40,7 +41,7 @@ import { Avatar } from "@material-ui/core";
 import ViewListIcon from '@material-ui/icons/ViewList';
 import { logoutUser, useUserDispatch, useUserState } from "../../../../context/UserContext";
 import API from "../../../../services/API";
-import { useLayoutDispatch } from "../../../../context/LayoutContext";
+// import { useLayoutDispatch } from "../../../../context/LayoutContext";
 import LoadingPage from './../../../../components/Loading/index';
 
 const structure = [
@@ -88,7 +89,7 @@ function Sidebar({ location, currentSemester, history }) {
 
   // global
   var isSidebarOpened = true;
-  var layoutDispatch = useLayoutDispatch();
+  // var layoutDispatch = useLayoutDispatch();
 
   return (<>
     <Card className={classes.profileCard}>

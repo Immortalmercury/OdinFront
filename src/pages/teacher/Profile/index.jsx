@@ -1,4 +1,4 @@
-import { Avatar, Button, Paper } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import Centered from "../../../components/Centered";
 import API from "../../../services/API";

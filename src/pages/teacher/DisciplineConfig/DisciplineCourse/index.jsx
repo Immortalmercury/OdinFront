@@ -39,6 +39,7 @@ const DisciplineCourse = (props) => {
       // setLoading(true);
       setRerender(false);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rerender]);
 
   const convertData = () => {

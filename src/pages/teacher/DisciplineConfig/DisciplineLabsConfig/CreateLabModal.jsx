@@ -3,15 +3,15 @@
 import DateFnsUtils from '@date-io/date-fns';
 import ruLocale from "date-fns/locale/ru";
 import {
-  KeyboardDateTimePicker,
-  DateTimePicker,
+  // KeyboardDateTimePicker,
+  // DateTimePicker,
   DatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import React, { useState, useEffect } from "react";
 import {
   IconButton,
-  Button,
+  // Button,
   Dialog,
   DialogContent,
   TextField,
@@ -24,42 +24,42 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
-import { Add, Publish } from "@material-ui/icons";
+import { Add } from "@material-ui/icons";
 import UploadFileButton from "../../../../components/FileButtons/UploadFileButton";
-import API from "../../../../services/API";
-import AttachmentIcon from '@material-ui/icons/Attachment';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
+// import API from "../../../../services/API";
+// import AttachmentIcon from '@material-ui/icons/Attachment';
+// import AttachFileIcon from '@material-ui/icons/AttachFile';
 import { FormControlLabel } from "@material-ui/core";
 
-const getInvitations = async (
-  invitationsCount,
-  role,
-  group,
-  setData,
-  setIsLoading,
-  setError,
-) => {
-  setIsLoading(true);
-  setError(false);
-  await API.call({
-    method: "create_students",
-    invitationsCount,
-    group,
-  }).then((result) => {
-    setIsLoading(false);
-    if (result.success) {
-      console.log(result.data);
-      setData(result.data);
-    } else {
-      setError(result.message);
-    }
-  });
-};
+// const getInvitations = async (
+//   invitationsCount,
+//   role,
+//   group,
+//   setData,
+//   setIsLoading,
+//   setError,
+// ) => {
+//   setIsLoading(true);
+//   setError(false);
+//   await API.call({
+//     method: "create_students",
+//     invitationsCount,
+//     group,
+//   }).then((result) => {
+//     setIsLoading(false);
+//     if (result.success) {
+//       console.log(result.data);
+//       setData(result.data);
+//     } else {
+//       setError(result.message);
+//     }
+//   });
+// };
 
 const CreateLabModal = ({ appendDataCallback, discipline }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [error, setError] = useState(false);
   const [data, setData] = useState(false);
   const [openLab, setOpenLab] = useState(false);

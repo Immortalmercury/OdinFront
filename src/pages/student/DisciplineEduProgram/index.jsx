@@ -1,40 +1,35 @@
 import React, { useState } from "react";
-import { Badge, Paper, Typography } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 import UploadFileButton from "../../../components/Buttons/UploadFileButton";
 import DownloadFileButton from "../../../components/Buttons/DownloadFileButton";
 import Section from "../../../components/Section";
-import MuiTable from "../../../components/MuiTable";
-import DateToRusTime from "../../../components/DateToRusTime/index";
-import SecondsToRusTime from "../../../components/SecondsToRusTime";
-import classnames from "classnames";
+// import classnames from "classnames";
 import useStyles from "./styles";
 import { Tooltip } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import ForwardIcon from '@material-ui/icons/Forward';
-
-const Statuses = "Проверка,Оценено,Повторная проверка".split(",");
 
 export default function DisciplineEduProgram(props) {
   const classes = useStyles();
   const [update, setUpdate] = useState(null);
   const [data, setData] = useState(null);
 
-  const Mark = (mark) => {
-    return (
-      <Badge
-        badgeContent={mark}
-        color="primary"
-        classes={{
-          colorPrimary: classnames({
-            [classes.greenDot]: mark === 5,
-            [classes.blueDot]: mark === 4,
-            [classes.orangeDot]: mark === 3,
-            [classes.redDot]: mark === 2,
-          }),
-        }}
-      />
-    );
-  };
+  // const Mark = (mark) => {
+  //   return (
+  //     <Badge
+  //       badgeContent={mark}
+  //       color="primary"
+  //       classes={{
+  //         colorPrimary: classnames({
+  //           [classes.greenDot]: mark === 5,
+  //           [classes.blueDot]: mark === 4,
+  //           [classes.orangeDot]: mark === 3,
+  //           [classes.redDot]: mark === 2,
+  //         }),
+  //       }}
+  //     />
+  //   );
+  // };
 
   return (
     <>

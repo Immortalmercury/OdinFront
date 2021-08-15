@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import {
   IconButton,
-  Button,
   Dialog,
   DialogContent,
   Tooltip,
@@ -73,6 +72,7 @@ const AddStudentModal = ({ appendDataCallback, course }) => {
     if (open) {
       loadData(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (

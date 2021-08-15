@@ -1,19 +1,13 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from "react";
-import { Grid, IconButton, Tooltip } from "@material-ui/core";
+import { Grid, IconButton, Tooltip, CircularProgress } from "@material-ui/core";
 import API from "../../../../services/API";
-import { Add, Archive, Delete, Description, GetApp } from "@material-ui/icons";
+import { Delete } from "@material-ui/icons";
 import useStyles from "./styles";
-import { CircularProgress } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
 import CreateLabModal from "./CreateLabModal";
 import DateToRusTime from './../../../../components/DateToRusTime/index';
 import LoadingPage from './../../../../components/Loading/index';
 import MuiTable from "../../../../components/MuiTable";
-
-const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
-  ",",
-);
 
 const DisciplineLabs = (props) => {
   const classes = useStyles();
@@ -22,8 +16,8 @@ const DisciplineLabs = (props) => {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(false);
   const [progressId, setProgressId] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [alertDescription, setAlertDescription] = useState(null);
+  // const [open, setOpen] = useState(false);
+  // const [alertDescription, setAlertDescription] = useState(null);
   const id_group = props.match.params.id_group;
 
   const removeFile = async (lab,group) => {
@@ -68,6 +62,7 @@ const DisciplineLabs = (props) => {
       setData(null);
       setLoading(true);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

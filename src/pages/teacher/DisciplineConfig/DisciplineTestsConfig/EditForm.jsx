@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Typography, FormGroup, Grid, Switch } from '@material-ui/core';
+import { TextField, FormGroup, Grid, Switch } from '@material-ui/core';
 import useStyles from "./styles";
 // import Editor from '../../../../components/Editor';
 import SecondsPicker from '../../../../components/SecondsPicker';

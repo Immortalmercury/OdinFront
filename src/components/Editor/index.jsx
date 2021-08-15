@@ -1,19 +1,19 @@
 
 import React, { useState } from 'react';
-import 'tinymce/tinymce';
-import 'tinymce/icons/default';
-import 'tinymce/themes/silver';
-import 'tinymce/plugins/paste';
-import 'tinymce/plugins/n1ed';
-import 'tinymce/plugins/link';
-import 'tinymce/plugins/image'; 
-import 'tinymce/plugins/table';
-import "tinymce/skins/ui/material-outlined/skin.min.css";
+// import 'tinymce/tinymce';
+// import 'tinymce/icons/default';
+// import 'tinymce/themes/silver';
+// import 'tinymce/plugins/paste';
+// import 'tinymce/plugins/n1ed';
+// import 'tinymce/plugins/link';
+// import 'tinymce/plugins/image'; 
+// import 'tinymce/plugins/table';
+// import "tinymce/skins/ui/material-outlined/skin.min.css";
 // import "tinymce/skins/ui/material-outlined/content.css";
 // import 'tinymce/skins/ui/oxide/skin.min.css';
 // import 'tinymce/skins/ui/oxide/content.min.css';
 // import 'tinymce/skins/content/default/content.min.css';
-import { Editor as TinyMCE } from '@tinymce/tinymce-react';
+// import { Editor as TinyMCE } from '@tinymce/tinymce-react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, IconButton, Tooltip } from "@material-ui/core";
-import MUIDataTable from "mui-datatables";
+// import MUIDataTable from "mui-datatables";
 import API from "../../../../services/API";
 import LoadingPage from "../../../../components/Loading";
 import { Add, Archive, Delete, Description, GetApp } from "@material-ui/icons";
@@ -13,7 +13,7 @@ import { Helmet } from "react-helmet";
 const monthA = " января , февраля , марта , апреля , мая , июня , июля , августа , сентября , октября , ноября , декабря ".split(
   ",",
 );
-const convertData = (data, classes, discipline, setRerender) => {};
+// const convertData = (data, classes, discipline, setRerender) => {};
 
 const getFile = async (id_resource, filename) => {
   await API.filecall(
@@ -75,6 +75,7 @@ const DisciplineResources = (props) => {
       setLoading(true);
       setRerender(false);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rerender]);
 
   return (

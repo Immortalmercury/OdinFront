@@ -8,7 +8,7 @@ import MuiTable from "../../../../components/MuiTable";
 import Section from "../../../../components/Section";
 import SecondsToRusTime from "../../../../components/SecondsToRusTime";
 import SecureOptionSwitcher from '../../../../components/SecureOptionSwitcher';
-import DateToRusTime from "../../../../components/DateToRusTime";
+// import DateToRusTime from "../../../../components/DateToRusTime";
 import EditTest from "../DisciplineTestsConfig/EditModal";
 import EditLecture from "../DisciplineLecturesConfig/EditModal";
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';

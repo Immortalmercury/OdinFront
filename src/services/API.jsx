@@ -3,8 +3,8 @@ import ClientJS from 'clientjs';
 import { AuthHeader, setTokens, unsetTokens, getAccessToken } from './JWT';
 import request from './AxiosDefaults';
 
-const secured = false;
-const baseRoute = 'http' + (secured ? 's' : '') + '://apiv3.localauc.ru';
+const secured = true;
+const baseRoute = 'http' + (secured ? 's' : '') + '://api.aucfpls.ru';
 
 export const loginRoute = baseRoute + '/auth/signin';
 export const refreshTokensRoute = baseRoute + '/auth/refresh';

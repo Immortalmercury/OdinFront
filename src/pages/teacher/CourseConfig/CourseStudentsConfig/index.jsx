@@ -10,7 +10,7 @@ import MuiTable from "../../../../components/MuiTable";
 import useStyles from "./styles";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import Section from '../../../../components/Section/index';
-import SettingsIcon from "@material-ui/icons/Settings";
+// import SettingsIcon from "@material-ui/icons/Settings";
 import HiddenValue from './../../../../components/HiddenValue/index';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import SecondsToRusTime from './../../../../components/SecondsToRusTime/index';

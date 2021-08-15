@@ -5,12 +5,12 @@ import API from "../../services/API";
 import { useState } from "react";
 import clsx from "clsx";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
+// import GetAppRoundedIcon from "@material-ui/icons/GetAppRounded";
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import CheckIcon from "@material-ui/icons/Check";
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+// import CheckIcon from "@material-ui/icons/Check";
+// import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import Close from "@material-ui/icons/Close";
+// import Close from "@material-ui/icons/Close";
 import useStyles from "./styles";
 
 export default function RequestButton({

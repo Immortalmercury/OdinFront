@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { useState } from "react";
+import React from "react";
 import {
   IconButton,
   Dialog,
@@ -12,7 +12,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
-import { useEffect } from 'react';
 
 const ControlableModal = ({
   onClose = ()=>{return true},

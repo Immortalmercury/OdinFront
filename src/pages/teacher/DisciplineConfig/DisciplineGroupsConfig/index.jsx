@@ -1,24 +1,25 @@
+/* eslint-disable array-callback-return */
 import {
-  Avatar,
+  // Avatar,
   CircularProgress,
   IconButton,
-  Paper,
+  // Paper,
   Tooltip,
 } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Switch from "@material-ui/core/Switch";
+// import FormLabel from "@material-ui/core/FormLabel";
+// import FormControl from "@material-ui/core/FormControl";
+// import FormGroup from "@material-ui/core/FormGroup";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import FormHelperText from "@material-ui/core/FormHelperText";
+// import Switch from "@material-ui/core/Switch";
 import LoadingPage from "../../../../components/Loading";
 import API from "../../../../services/API";
 import MuiTable from "../../../../components/MuiTable";
 import useStyles from "./styles";
-import { Delete } from "@material-ui/icons";
+// import { Delete } from "@material-ui/icons";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import AddGroupModal from "./AddGroupModal";
 import ForwardIcon from "@material-ui/icons/Forward";
@@ -40,13 +41,13 @@ const DisciplineGroupsConfig = (props) => {
     setData({ ...data, students: newData });
   };
 
-  const appendTeacher = (newValues) => {
-    let newData = newValues;
-    Object.entries(data.teachers_data).map((e) => {
-      newData.push(e[1]);
-    });
-    setData({ ...data, teachers_data: newData });
-  };
+  // const appendTeacher = (newValues) => {
+  //   let newData = newValues;
+  //   Object.entries(data.teachers_data).map((e) => {
+  //     newData.push(e[1]);
+  //   });
+  //   setData({ ...data, teachers_data: newData });
+  // };
 
   const removeGroup = async (group) => {
     setRemoveGroupProgress(true);
@@ -85,6 +86,7 @@ const DisciplineGroupsConfig = (props) => {
 
   useEffect(() => {
     loadData(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

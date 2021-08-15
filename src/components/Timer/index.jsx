@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Typography, CircularProgress } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
+// import { Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import Centered from "./../Centered/index";
 import useCountDown from "react-countdown-hook";
@@ -8,8 +8,9 @@ import { useEffect } from "react";
 import CheckIcon from "@material-ui/icons/Check";
 
 const Timer = ({ time=60000, onTimeout, size = 150,fontSize=32,p100 }) => {
-  const now = new Date();
-  const [p100local, setp100local] = useState(p100);
+  // const now = new Date();
+  // const [, setp100local] = useState(p100);
+  const p100local = p100;
   // eslint-disable-next-line no-unused-vars
   const [timeLeft, { start, pause, resume, reset }] = useCountDown(time);
   const [hoursLeft, setHoursLeft] = useState(null);
