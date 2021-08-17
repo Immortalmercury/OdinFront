@@ -12,8 +12,8 @@ import LabsTimeline from '../../../pages/student/LabsTimeline/index';
 import Sidebar from "./Sidebar/Sidebar";
 import CoursesList from '../../../pages/student/CoursesList/CoursesList';
 import CoursesPage from './../../../pages/student/CoursePage/CoursesPage';
-import LecturePage from "../../../pages/student/LecturePage";
 import { Helmet } from 'react-helmet';
+import LecturePage from "../../../pages/student/LecturePage";
 
 function StudentLayout(props) {
   var classes = useStyles();
@@ -37,7 +37,8 @@ function StudentLayout(props) {
 
           <Route exact path="/student/courses/" component={CoursesList} />
           <Route exact path="/student/courses/:course_id" component={CoursesPage} />
-          <Route path="/student/courses/:course_id/discipline/:id_discipline/lecture/:lecture_id" component={LecturePage} />
+          <Route exact path="/student/courses/:course_id/discipline/:id_discipline/lecture/:lecture_id" component={LecturePage} />
+          <Route exact path="/student/courses/:course_id/discipline/:id_discipline/test/:test_id" component={LecturePage} />
           <Route exact path="/student/courses/:course_id/discipline/:id_discipline"
               render={(props) => <Redirect to={'./' + props.match.params.id_discipline + "/labs"} />} />
           <Route path="/student/courses/:course_id/discipline/:id_discipline/:tab" component={DisciplineLayout} />

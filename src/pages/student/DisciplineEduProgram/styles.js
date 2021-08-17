@@ -8,6 +8,8 @@ export default makeStyles((theme) => ({
   },
   date: {
     padding: "6px 5px",
+    display: 'flex',
+    alignItems: 'center',
   },
   separatorDate: {
     padding: "30px",

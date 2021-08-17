@@ -69,6 +69,7 @@ const Section = ({
   }
 
   const getData = async (opening = false) => {
+    console.log('init');
     if (opening) setLoading(true);
     if (request === null) {
       setOpened(true);

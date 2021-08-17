@@ -15,7 +15,7 @@ const EditModal = ({
   route
 }) => {
   // const classes = useStyles();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [update, setUpdate] = useState(false);
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const [formChanged, setFormChanged] = useState(false); 
@@ -58,7 +58,7 @@ const EditModal = ({
 
   return (
       <ControlableModal
-        modalTitle={id === null ? 'Создать тест' : 'Редактировать тест (ID '+ id +')'}
+        modalTitle={id === null ? 'Создать вопрос' : 'Редактировать вопрос (ID '+ id +')'}
         onClose={() => {
           if (formChanged === true) {
             setCloseConfirmation(true);

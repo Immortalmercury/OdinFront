@@ -26,7 +26,7 @@ import {
   Notifications,
   LibraryBooks,
 } from "@material-ui/icons";
-import TimelineIcon from "@material-ui/icons/Timeline";
+// import TimelineIcon from "@material-ui/icons/Timeline";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
 // import { useUserDispatch, logoutUser } from "./../../context/UserContext";
@@ -90,12 +90,12 @@ function Sidebar({ location, history }) {
 
   const makeMenu = (items) => {
     let menu = [
-      {
-        id: 0,
-        label: "Таймлайн",
-        link: "/student/timeline",
-        icon: <TimelineIcon />,
-      },
+      // {
+      //   id: 0,
+      //   label: "Таймлайн",
+      //   link: "/student/timeline",
+      //   icon: <TimelineIcon />,
+      // },
       {
         id: 10,
         label: "Курсы",

@@ -128,7 +128,7 @@ const DisciplineLecturesConfig = (props) => {
                             }}
                             disabled={progressId}
                           >
-                            <Tooltip title="Перейти в раздел теста" placement="top" arrow><Forward /></Tooltip>
+                            <Tooltip title="Перейти в банк вопросов теста" placement="top" arrow><Forward /></Tooltip>
                           </IconButton>
                           {deleteAllowed && (
                             <IconButton

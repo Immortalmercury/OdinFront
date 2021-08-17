@@ -152,11 +152,11 @@ const DisciplineLecturesConfig = (props) => {
                               color={"primary"}
                               className={classes.B4}
                               onClick={() => {
-                                props.history.push('./test/' + id);
+                                props.history.push('./test/' + el.instance_element_id);
                               }}
                               disabled={progressId}
                             >
-                              <Tooltip title="Перейти в раздел теста" placement="top" arrow><Forward /></Tooltip>
+                              <Tooltip title="Перейти в банк вопросов теста" placement="top" arrow><Forward /></Tooltip>
                           </IconButton>
                         )}
                         {deleteAllowed && (<>

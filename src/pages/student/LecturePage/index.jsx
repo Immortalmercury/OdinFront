@@ -1,60 +1,35 @@
-import { Tooltip } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import { Avatar } from '@material-ui/core';
-import { Email } from '@material-ui/icons';
 import React, { useState } from 'react';
-import Centered from '../../../components/Centered';
 import Section from '../../../components/Section/index';
+import { Paper } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
+import PageTitle from '../../../components/PageTitle/PageTitle';
 import { Button } from '@material-ui/core';
 
 const LecturePage = (props) => {
-  const [update, setUpdate] = useState(null);
   const [data, setData] = useState(null);
+  const discipline_id = props.match.params.id_discipline
+  const lecture_id = props.match.params.lecture_id
+  const route = '/discipline/' + discipline_id + '/lecture/' + lecture_id;
 
   return (
     <>
-      <Section
-        requestData={{
-          method: 'get_lecture',
-          discipline: props.match.params.id_discipline,
-        }}
-        setData={setData}
-        update={update}
-        setUpdate={setUpdate}
-        debug
-      >
+      <Section request={{ route }} setData={setData} debug>
         {data && (<>
-          <Centered style={{minHeight:400,alignItems:"flex-start",padding:50,flexDirection:"row", flexWrap:"wrap",justifyItems:'flex-start'}}>
-            {data.map((el) =>
-              <div style={{display:'flex',alignItems:'center',marginBottom:40,}}>
-                <Avatar src={el.photo} style={{ margin: 10, marginLeft:40, width: 150, height: 150 }} />
-                <div style={{display:'flex',flexDirection:"column",alignItems:'center', marginLeft:0, justifyItems:'center',minWidth: 350}}>
-                <Typography variant="h4" style={{marginBottom: 20}}>
-                  {el.s_name +
-                  " " +
-                  (el.f_name + " ") +
-                  (el.fth_name!==null ? el.fth_name:'')}
-                </Typography>
-                <Tooltip arrow position="top" title="Написать по E-mail">
-                  <Button
-                    color={"primary"}
-                    variant="contained"
-                    startIcon={<Email />}
-                    onClick={() => {
-                      window.location.href = "mailto:"+el.email;
-                    }}
-                  >
-                  Отправить Email
-                </Button>
-                </Tooltip>
-                </div>
-              </div>
-            )}
-          </Centered>
-       </>)} 
+          <PageTitle title={data && data.name} />
+          
+          <Paper elevation={3} style={{padding:20, paddingLeft:40}}>
+            <div dangerouslySetInnerHTML={{__html:data.content}}/>
+
+          </Paper>
+          <Button variant="contained" color="primary" fullWidth onClick={() => {
+            props.history.goBack();
+          }}
+          style={{marginTop:10}}
+          >Назад</Button>
+        </>)}
       </Section>
     </>
   );
 };
 
-export default LecturePage;
+export default withRouter(LecturePage);

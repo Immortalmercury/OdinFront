@@ -8,9 +8,27 @@ import MuiTable from "../../../components/MuiTable";
 import Section from "../../../components/Section";
 import SecondsToRusTime from "../../../components/SecondsToRusTime";
 import SecureOptionSwitcher from '../../../components/SecureOptionSwitcher';
-import DateToRusTime from "../../../components/DateToRusTime";
 import Header from "../../../components/Header/Header";
 import HiddenValue from './../../../components/HiddenValue/index';
+
+const ShowAnswers = (answers) => {
+  
+  return (<>
+    <ul>
+      {answers?.answers && Object.entries(answers.answers).map(item => {
+        console.log(item);
+        let el = item[1];
+        return (
+          <li>
+            <div
+              dangerouslySetInnerHTML={{ __html: el.text }}
+              style={el.isCorrect ? {borderLeft:'2px solid #0C0',paddingLeft:10}:{borderLeft: '2px dashed #C00',paddingLeft:10}}
+            />
+          </li>);
+      })}
+    </ul>
+  </>);
+}
 
 const TestQuestionsBank = (props) => {
   const classes = useStyles();
@@ -96,7 +114,7 @@ const TestQuestionsBank = (props) => {
             "ID",
             "Вопрос",
             "Тип ответа",
-            "Варианты ответа",
+            "Ответы",
             "Обязателен",
             "Время",
             "Стоимость",
@@ -117,10 +135,11 @@ const TestQuestionsBank = (props) => {
                         id,
                         <div dangerouslySetInnerHTML={{__html:el.text}}/>,
                         el.id_type === 1 ? <RadioButtonChecked /> : <CheckBox />,
-                        <HiddenValue label="Email" text={el.answers} />,
+                        <HiddenValue label="варианты ответа" text={<ShowAnswers answers={ el.answers }/>} />,
                         el.required ? "Да" : "Нет",
-                        el.time === null ? "-":<SecondsToRusTime time={el.time}/>,
-                        <DateToRusTime time={el.updated_at || el.created_at}/>,
+                        el.time === null ? "-" : <SecondsToRusTime time={el.time} />,
+                        el.weight,
+                        // <DateToRusTime time={el.updated_at || el.created_at}/>,
                         <div style={{ display: "flex" }}>
                           <IconButton
                             color={"primary"}

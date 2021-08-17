@@ -175,16 +175,6 @@ const EditForm = ({data, setData, setFormChanged}) => {
               change(id, 'text', value);
             }}
           />
-          {/* <CKEditor editor={ClassicEditor} 
-            data={el.text}
-              
-            onChange={ ( event, editor ) => {
-              const editorData = editor.getData();
-              change(el.id, 'text', editorData);
-              // setTempValue(data);
-              // onChange(tempValue);
-            } }
-          /> */}
           
           
         </div>);
@@ -207,9 +197,9 @@ const EditForm = ({data, setData, setFormChanged}) => {
         <CKEditor
             editor={ ClassicEditor }
             data={data?.text}
-            onReady={ editor => {
-                // console.log( 'Editor is ready to use!', editor );
-            } }
+            // onReady={ editor => {
+            //     // console.log( 'Editor is ready to use!', editor );
+            // } }
             onChange={ ( event, editor ) => {
               const text = editor.getData();
               if (data?.text !== text)
@@ -219,10 +209,10 @@ const EditForm = ({data, setData, setFormChanged}) => {
         />
         <TextField
           variant="outlined"
-          label="Тип ответа"
+          label="Тип ответа *"
           select
           margin="normal"
-          value={data?.id_type || null}
+          value={data?.id_type || 1}
           onChange={(e) => {
             if (data?.id_type !== e.target.value)
               setFormChanged(true);
@@ -237,7 +227,7 @@ const EditForm = ({data, setData, setFormChanged}) => {
           label="Сложность вопроса"
           select
           margin="normal"
-          value={data?.level || null}
+          value={data?.level || 2}
           onChange={(e) => {
             if (data?.level !== e.target.value)
               setFormChanged(true);
@@ -261,12 +251,12 @@ const EditForm = ({data, setData, setFormChanged}) => {
         />
         <TextField
           variant="outlined"
-          label="Вес правильного ответа (баллы), например: 5"
+          label="Вес правильного ответа (баллы), например: 1"
           fullWidth
           helperText={'Придерживайтесь какого-то определенного диапазона, чтобы не создать "супер-вопрос"'}
           type="number"
           margin="normal"
-          value={(data?.weight) || null}
+          value={(data?.weight) || 1}
           onChange={(e) => {
             if (data?.weight !== e)
               setFormChanged(true);
@@ -275,7 +265,7 @@ const EditForm = ({data, setData, setFormChanged}) => {
         />
         <FormControlLabel
           control={<Checkbox
-            checked={(data?.required)|| null}
+            checked={(data?.required)|| false}
             onChange={(e) => {
               if (data?.required !== e.target.checked)
                 setFormChanged(true);
@@ -298,140 +288,6 @@ const EditForm = ({data, setData, setFormChanged}) => {
             console.log(e);
           }}
         />
-
-          {/* <form onSubmit={handleSubmit(data => console.log(data))}>
-            <Controller
-              control={control}
-              name="ReactDatepicker"
-              render={({ field: { onChange, onBlur, value, ref } }) => (
-                // <ReactDatePicker
-                //   onChange={onChange}
-                //   onBlur={onBlur}
-                //   selected={value}
-                // />
-                <TextField
-                  variant="outlined"
-                  label="Отображение результатов тестирования"
-                  select
-                  margin="normal"
-                  value={(data && data.parameters && data.parameters.show_results) || null}
-                  onChange={(e) => {
-                    if (data && data.parameters && data.parameters.show_results !== e)
-                      setFormChanged(true);
-                    setData({ ...data, parameters: { ...data.parameters, show_results: e.target.value }});
-                  }}
-                >
-                    <MenuItem value={'not'}>Не показывать</MenuItem>
-                    <MenuItem value={'mark'}>Показывать только правильность ответа (оценку за вопрос)</MenuItem>
-                    <MenuItem value={'answer'}>Показывать правильный ответ и оценку за вопрос</MenuItem>
-                    <MenuItem value={'description'}>Показывать правильный ответ, оценку и обоснование</MenuItem>
-                </TextField>
-              )}
-            />
-            
-            <input type="submit" />
-          </form> */}
-        {/* <FormControl component="fieldset" className={classes.formControl} margin="normal">
-          <FormLabel component="legend">Как усложнять тест с каждой новой попыткой?</FormLabel>
-          <FormGroup style={{marginLeft:10,marginTop:5}}>
-            <FormControlLabel
-            control={<Checkbox
-              checked={(data && data.parameters && data.parameters.harder_attempts_more_questions)|| null}
-              onChange={(e) => {
-                if (data && data.parameters && data.parameters.harder_attempts_more_questions !== e.target.checked)
-                  setFormChanged(true);
-                setData({
-                  ...data, parameters:
-                  {...data.parameters, harder_attempts_more_questions: e.target.checked}
-                });
-              }}
-              color="primary"
-            />}
-              label="Увеличивать кол-во вопросов (+ дополнительное время)"
-            />
-            <FormControlLabel
-            control={<Checkbox
-              checked={(data && data.parameters && data.parameters.harder_attempts_level)|| null}
-              onChange={(e) => {
-                if (data && data.parameters && data.parameters.harder_attempts_level !== e.target.checked)
-                  setFormChanged(true);
-                setData({
-                  ...data, parameters:
-                  {...data.parameters, harder_attempts_level: e.target.checked}
-                });
-              }}
-              color="primary"
-            />}
-              
-              label="Увеличивать сложность вопросов"
-            />
-          </FormGroup>
-          <FormLabel component="legend">Контроль списывания</FormLabel>
-          <FormGroup style={{marginLeft:10,marginTop:5}}>
-            <FormControlLabel
-            control={<Switch
-              checked={(data && data.parameters && data.parameters.question_time_limited)|| null}
-              onChange={(e) => {
-                if (data && data.parameters && data.parameters.question_time_limited !== e.target.checked)
-                  setFormChanged(true);
-                setData({
-                  ...data, parameters:
-                  {...data.parameters, question_time_limited: e.target.checked}
-                });
-              }}
-              color="primary"
-            />}
-              label="Ограничение времени для каждого вопроса"
-            />
-            <FormControlLabel
-            control={<Switch
-              checked={(data && data.parameters && data.parameters.test_defender)|| null}
-              onChange={(e) => {
-                if (data && data.parameters && data.parameters.test_defender !== e.target.checked)
-                  setFormChanged(true);
-                setData({
-                  ...data, parameters:
-                  {...data.parameters, test_defender: e.target.checked}
-                });
-              }}
-              color="primary"
-            />}
-              label="Жесткий контроль при тестировании"
-            />
-            {(data && data.parameters && data.parameters.test_defender) && (<>
-              <FormControlLabel
-                control={<Switch
-                  checked={(data && data.parameters && data.parameters.defender_warnings)|| null}
-                  onChange={(e) => {
-                    if (data && data.parameters && data.parameters.defender_warnings !== e.target.checked)
-                      setFormChanged(true);
-                    setData({
-                      ...data, parameters:
-                      {...data.parameters, defender_warnings: e.target.checked}
-                    });
-                  }}
-                color="primary"
-              />}
-                label="Выдавать 2 предупреждения перед фиксацией нарушения"
-              />
-              <FormControlLabel
-                control={<Switch
-                  checked={(data && data.parameters && data.parameters.max_hardness_after_violation)|| null}
-                  onChange={(e) => {
-                    if (data && data.parameters && data.parameters.max_hardness_after_violation !== e.target.checked)
-                      setFormChanged(true);
-                    setData({
-                      ...data, parameters:
-                      {...data.parameters, max_hardness_after_violation: e.target.checked}
-                    });
-                  }}
-                color="primary"
-              />}
-                label="Максимальная сложность теста при следующей попытке, если нарушение было зафиксировано"
-              />
-            </>)}
-          </FormGroup>
-        </FormControl> */}
       </Grid>
     </Grid>
   </>);
