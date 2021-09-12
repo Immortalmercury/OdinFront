@@ -79,7 +79,7 @@ const EditForm = ({data, setData, setFormChanged}) => {
     value = [],
     onChange = (value) => { },
   }) => {
-    const defaultValue = { text: null, isCorrect: false };
+    const defaultValue = { text: null, correct: false, weight: 0 };
     const [fields, setFields] = useState(value);
 
     const makeId = (length) => {
@@ -96,16 +96,6 @@ const EditForm = ({data, setData, setFormChanged}) => {
       let temp = fields;
       temp[id][fieldName] = value;
       onChange(temp);
-      
-      // let tempArray = [];
-      // fields.forEach(el => {
-      //   if (el.id === id) {
-      //     el[fieldName] = value;
-      //   }
-      //   tempArray.push(el);
-      // });
-      // onChange(tempArray);
-
     }
 
     const addField = () => {
@@ -114,23 +104,12 @@ const EditForm = ({data, setData, setFormChanged}) => {
       temp[id] = defaultValue;
       temp[id].id = id;
       onChange(temp);
-      // let tempField = defaultValue;
-      // tempField.id = makeId(3);
-      // onChange(fields.concat([tempField]));
     }
 
     const removeField = (id) => {
       let temp = fields;
       delete temp[id];
       onChange(temp);
-      // let tempArray = [];
-      // Object.values(fields)
-      // fields.forEach(el => {
-      //   if (el.id !== id) {
-      //     tempArray.push(el);
-      //   }
-      // });
-      // onChange(tempArray);
     }
 
     useEffect(() => {
@@ -151,15 +130,28 @@ const EditForm = ({data, setData, setFormChanged}) => {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={el.isCorrect || null}
+                  checked={el.correct || null}
                   onChange={(e) => {
-                    change(id, 'isCorrect', e.target.checked);
+                    change(id, 'correct', e.target.checked);
                   }}
                 label=""
                 color="primary"
               />}
               label="Правильный ответ"
             />
+            {/*<TextField
+              // variant="outlined"
+              label="Стоимость выбора ответа от -100 до 100"
+              type="number"
+              
+              // margin="normal"
+              // value={(el?.weight) || 0}
+              // onChange={(e) => {
+              //   if (el?.weight !== e.target.value)
+              //     setFormChanged(true);
+              //   setData({ ...el, weight: e.target.value });
+              // }}
+            />*/}
             
             <IconButton
               color={'primary'}
@@ -274,6 +266,19 @@ const EditForm = ({data, setData, setFormChanged}) => {
             color="primary"
           />}
           label="На этот вопрос нужно обязательно дать правильный ответ для сдачи теста"
+        />
+        <Typography
+          className={classes.editorLabel}
+        ><span className={classes.editorLabelText}>Обоснование правильного ответа</span></Typography>
+        <CKEditor
+          editor={ ClassicEditor }
+          data={data?.reason}
+          onChange={ ( event, editor ) => {
+            const text = editor.getData();
+            if (data?.reason !== text)
+              setFormChanged(true);
+            setData({ ...data, reason: text });
+          } }
         />
         
       </Grid>

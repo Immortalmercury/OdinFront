@@ -8,6 +8,10 @@ const SecondsToRusTime = ({time}) => {
   if (time === null) {
     return null;
   }
+  
+  if (time < 60){
+    return time+' секунд';
+  }
 
   return (<>
     {(daysLeft = Math.floor(time / 60 / 60 / 24)) >0 && daysLeft}

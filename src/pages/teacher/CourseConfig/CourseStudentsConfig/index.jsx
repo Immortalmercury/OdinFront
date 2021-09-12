@@ -1,4 +1,5 @@
 import {
+  Button,
   CircularProgress,
   IconButton,
   Tooltip,
@@ -15,9 +16,11 @@ import HiddenValue from './../../../../components/HiddenValue/index';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import SecondsToRusTime from './../../../../components/SecondsToRusTime/index';
 import AddStudentModal from './AddStudentModal';
+import {useLocation, withRouter} from "react-router-dom";
 
 const CourseStudentsConfig = (props) => {
   const classes = useStyles();
+  const location = useLocation();
   const [data, setData] = useState(null);
   const [update, setUpdate] = useState(null);
   
@@ -66,8 +69,8 @@ const CourseStudentsConfig = (props) => {
           </div>
         }
         viewColumns={false}
-        search={false}
-        columns={["ФИО", "Email", "Блокировка", "Последняя активность", "Действия"]}
+        search={true}
+        columns={["ФИО", "Email", "Блокировка", "Последняя активность", "Результаты", "Действия"]}
         noMatch={"На курс никто не записан"}
         data={
           !data
@@ -104,30 +107,35 @@ const CourseStudentsConfig = (props) => {
                       {" назад"}
                     </>
                   ),
+                  <Button
+                    onClick={() => props.history.push(location.pathname+'/user/'+el.id_user)}
+                    variant={"outlined"}
+                    color={"primary"}
+                  >Перейти</Button>,
                   <IconButton
-                  disabled={userProgressId}
-                    variant="outlined"
-                    className={classes.B2}
-                  color="secondary"
-                  onClick={() => {
-                    removeFromCourse(el.id_user);
-                  }}
-                >
-                  {userProgressId === el.id_user ? (
-                    <CircularProgress
-                      color="primary"
-                      size={20}
-                    />
-                  ) : (
-                    <Tooltip
-                      title="Исключить из курса"
-                      placement="top"
-                      arrow
-                    >
-                      <RemoveCircleIcon />
-                    </Tooltip>
-                  )}
-                </IconButton>
+                    disabled={userProgressId}
+                      variant="outlined"
+                      className={classes.B2}
+                    color="secondary"
+                    onClick={() => {
+                      removeFromCourse(el.id_user);
+                    }}
+                  >
+                    {userProgressId === el.id_user ? (
+                      <CircularProgress
+                        color="primary"
+                        size={20}
+                      />
+                    ) : (
+                      <Tooltip
+                        title="Исключить из курса"
+                        placement="top"
+                        arrow
+                      >
+                        <RemoveCircleIcon />
+                      </Tooltip>
+                    )}
+                  </IconButton>
                 ]);
               });
 
@@ -147,4 +155,4 @@ const CourseStudentsConfig = (props) => {
   );
 };
 
-export default CourseStudentsConfig;
+export default withRouter(CourseStudentsConfig);

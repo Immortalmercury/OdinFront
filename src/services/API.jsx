@@ -148,7 +148,7 @@ export const logout = async (tokenSessionId = null) => {
                 console.log('All tokens deleted once again');
                 unsetTokens();
             } else if (result.status === 'TOKEN_EXPIRED') {
-                console.log('Wow! TOKEN_EXPIRED, I did not think for such posibility. Ok... Let\'s retry');
+                console.log('Wow! TOKEN_EXPIRED, I did not think it is possible. Ok... Let\'s retry');
                 return logout(tokenSessionId);
             }
         }

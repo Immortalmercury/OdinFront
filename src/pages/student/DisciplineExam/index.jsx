@@ -91,90 +91,90 @@ const DisciplineExam = (props) => {
           </>)}
           {data.variant === null && (
               <>
-              <Paper
-                elevation={3}
-                style={{
-                  width: "100%",
-                  height: 500,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  padding: 20,
-                  marginTop: 10,
-                  position: "relative",
-                }}
-              >
-            {(allowedAfter < now || now < deadline) ? (
-              <span style={{ color: "green", position: "absolute", left: 20, top: 20 }}>
-                <Typography>
-                    <FiberManualRecord style={{ height: 12 }} />
-                    Экзамен начался{allowedAfter < deadline && <>{'. Окончание '} <DateToRusTime time={deadline} /></>}
-                </Typography>
-              </span>
-            ) : (
-              <span style={{ color: "red", position: "absolute", left: 20, top: 20 }}>
-                <Typography>
-                    <FiberManualRecord style={{ height: 12 }} />
-                    Экзамен завершен
-                </Typography>
-              </span>
-            )}
-                <Centered>
-                  {(allowedAfter < now || now < deadline) ? (<>
-                    <Typography variant="h6" style={{ margin: 10 }}>
-                      Экзамен длится:
-                      {allowedAfter > deadline ?
-                        "Не ограничено"
-                        : <SecondsToRusTime
-                          time={
-                            (deadline -
-                              allowedAfter)
-                            / 1000}
-                        />}
-                    </Typography>
-
-                    {/* <Typography variant="h6" style={{ margin: 10 }}>
-                      Осталось времени:
-                        <SecondsToRusTime time={(allowedAfter - now) / 1000} />
-                    </Typography> */}
-
-                    {opening && (<>
-                      <Typography variant="h6" style={{ margin: 10 }}>
-                        <span style={{ color: "green", marginRight: 10 }}>
-                          <Check />
-                        </span>
-                      Вариант получен</Typography>
-                      <Typography variant="h6" style={{ margin: 10 }}>Загрузка задания ...</Typography>
-                    </>)}
-                    
-                  
-                    <RequestButton
-                      variant="contained"
-                      color="primary"
-                      label="Получить вариант и приступить"
-                      buttonType="Button"
-                      debug={debug}
-                      requestData={{
-                        method: 'get_variant',
-                        discipline: props.match.params.id_discipline,
-                        examForm: examForm,
-                      }}
-                      onSuccess={async (data) => {
-                        setOpening(true);
-                        await API.filecall({
-                          method: 'get_lab_file',
-                          lab: data.id_lab,
-                        }, data.file.split('/').pop(), debug);
-                        setUpdate('silent');
-                      }}
-                    />
-                  </>) : (
-                    <Typography variant="h4" style={{ margin: 10 }}>
-                      Не явился(-лась)
-                    </Typography>
+                <Paper
+                  elevation={3}
+                  style={{
+                    width: "100%",
+                    height: 500,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    padding: 20,
+                    marginTop: 10,
+                    position: "relative",
+                  }}
+                >
+                  {(allowedAfter < now || now < deadline) ? (
+                    <span style={{ color: "green", position: "absolute", left: 20, top: 20 }}>
+                      <Typography>
+                          <FiberManualRecord style={{ height: 12 }} />
+                          Экзамен начался{allowedAfter < deadline && <>{'. Окончание '} <DateToRusTime time={deadline} /></>}
+                      </Typography>
+                    </span>
+                  ) : (
+                    <span style={{ color: "red", position: "absolute", left: 20, top: 20 }}>
+                      <Typography>
+                          <FiberManualRecord style={{ height: 12 }} />
+                          Экзамен завершен
+                      </Typography>
+                    </span>
                   )}
-                </Centered>
-          </Paper>
+                  <Centered>
+                    {(allowedAfter < now || now < deadline) ? (<>
+                      <Typography variant="h6" style={{ margin: 10 }}>
+                        Экзамен длится:
+                        {allowedAfter > deadline ?
+                          "Не ограничено"
+                          : <SecondsToRusTime
+                            time={
+                              (deadline -
+                                allowedAfter)
+                              / 1000}
+                          />}
+                      </Typography>
+    
+                      {/* <Typography variant="h6" style={{ margin: 10 }}>
+                        Осталось времени:
+                          <SecondsToRusTime time={(allowedAfter - now) / 1000} />
+                      </Typography> */}
+    
+                      {opening && (<>
+                        <Typography variant="h6" style={{ margin: 10 }}>
+                          <span style={{ color: "green", marginRight: 10 }}>
+                            <Check />
+                          </span>
+                        Вариант получен</Typography>
+                        <Typography variant="h6" style={{ margin: 10 }}>Загрузка задания ...</Typography>
+                      </>)}
+                      
+                    
+                      <RequestButton
+                        variant="contained"
+                        color="primary"
+                        label="Получить вариант и приступить"
+                        buttonType="Button"
+                        debug={debug}
+                        requestData={{
+                          method: 'get_variant',
+                          discipline: props.match.params.id_discipline,
+                          examForm: examForm,
+                        }}
+                        onSuccess={async (data) => {
+                          setOpening(true);
+                          await API.filecall({
+                            method: 'get_lab_file',
+                            lab: data.id_lab,
+                          }, data.file.split('/').pop(), debug);
+                          setUpdate('silent');
+                        }}
+                      />
+                    </>) : (
+                      <Typography variant="h4" style={{ margin: 10 }}>
+                        Не явился(-лась)
+                      </Typography>
+                    )}
+                  </Centered>
+              </Paper>
             </>
           )}
           {data.variant !== null && (<>

@@ -22,7 +22,7 @@ const ShowAnswers = (answers) => {
           <li>
             <div
               dangerouslySetInnerHTML={{ __html: el.text }}
-              style={el.isCorrect ? {borderLeft:'2px solid #0C0',paddingLeft:10}:{borderLeft: '2px dashed #C00',paddingLeft:10}}
+              style={el.correct ? {borderLeft:'2px solid #0C0',paddingLeft:10}:{borderLeft: '2px dashed #C00',paddingLeft:10}}
             />
           </li>);
       })}
@@ -45,7 +45,7 @@ const TestQuestionsBank = (props) => {
   const [deleteAllowed, setDeleteAllowed] = useState(false);
   const [confirmationPassword, setConfirmationPassword] = useState("");
   
-  // Editor varibles
+  // Editor variables
   const [editorOpen, setEditorOpen] = useState(false);
 
   function edit(id) {

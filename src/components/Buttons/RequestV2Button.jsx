@@ -16,6 +16,7 @@ export default function RequestV2Button({
   icon,
   fullWidth = false,
   debug = false,
+  successLabel = null,
   ...props
 }) {
   const classes = useStyles();
@@ -73,7 +74,7 @@ export default function RequestV2Button({
       <div className={classes.root}>
         {buttonType !== "IconButton" ? (
           <>
-            <div className={classes.wrapper} style={fullWidth && {width:'100%'}}>
+            <div className={classes.wrapper} style={fullWidth ? {width:'100%'}:{}}>
               <Button
                 className={buttonClassname}
                 disabled={loading}
@@ -86,7 +87,7 @@ export default function RequestV2Button({
               >
                 <div style={{ textAlign: "center" }}>
                   {error && errorTooltip}
-                  {success && <>Успешно</>}
+                  {success && (successLabel ? successLabel:'Успешно')}
                   {!success && !error && label}
                 </div>
               </Button>

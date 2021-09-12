@@ -39,7 +39,7 @@ const EditForm = ({data, setData, setFormChanged}) => {
             setData({ ...data, parameters: { ...data.parameters, test_type: e.target.value }});
           }}
         >
-            <MenuItem value={'selfСontrol'}>Тест для самоконтроля</MenuItem>
+            <MenuItem value={'selfControl'}>Тест для самоконтроля</MenuItem>
             <MenuItem value={'exam'}>Тест на оценку</MenuItem>
         </TextField>
         <SecondsPicker
@@ -66,7 +66,7 @@ const EditForm = ({data, setData, setFormChanged}) => {
         />
         <TextField
           variant="outlined"
-          label="Разрешено попыток"
+          label="Разрешено попыток ( 0 - неограниченно )"
           fullWidth
           type="number"
           margin="normal"

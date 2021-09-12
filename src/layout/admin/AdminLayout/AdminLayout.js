@@ -17,6 +17,7 @@ import CourseConfigLayout from './../../../pages/teacher/CourseConfig/CourseConf
 import { Helmet } from 'react-helmet';
 import { useUserState } from "../../../context/UserContext";
 import TestQuestionsBank from "../../../pages/teacher/TestQuestionsBank";
+import StudentResults from "../../../pages/teacher/StudentResults";
 
 function AdminLayout(props) {
   var classes = useStyles();
@@ -42,6 +43,7 @@ function AdminLayout(props) {
           <Route exact path="/teacher/all_disciplines" component={AllDisciplines} />
           <Route exact path="/teacher/courses/all" component={AllCourses} />
           <Route exact path="/teacher/courses/:id_course" component={CourseConfigLayout} />
+          <Route exact path="/teacher/courses/:id_course/user/:user_id" component={StudentResults} />
           <Route exact path="/teacher/discipline/:id_discipline" component={DisciplineConfigLayout} />
           <Route exact path="/teacher/discipline/:id_discipline/:tab" component={DisciplineConfigLayout} />
           <Route exact path="/teacher/discipline/:id_discipline/test/:id_test" component={TestQuestionsBank} />

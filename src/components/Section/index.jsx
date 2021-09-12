@@ -18,6 +18,7 @@ const Section = ({
   timerDecoration = null,
   debug = false,
   noDataAllowed = false,
+  onError=null,
 }) => {
   const [pageOpenedAt] = useState(new Date());
   const [opened, setOpened] = useState(null);
@@ -66,6 +67,7 @@ const Section = ({
       );
     }
     setLoading(null);
+    if (onError !== null) onError(result);
   }
 
   const getData = async (opening = false) => {
@@ -136,7 +138,7 @@ const Section = ({
                 variant="outlined"
                 size="large"
                 onClick={() => {
-                  getData(true);
+                  setUpdate('refresh');
                 }}
                 style={{marginTop:20}}
               >Повторить запрос</Button>

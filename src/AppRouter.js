@@ -20,8 +20,8 @@ import WeUseCookieMessage from './components/WeUseCookieMessage/index';
 
 export default function App() {
   // global
-  var { isAuthenticated, role } = useUserState();
-  var userDispatch = useUserDispatch();
+  const {isAuthenticated, role} = useUserState();
+  const userDispatch = useUserDispatch();
   
   if (isAuthenticated && role === null) {
     refreshTokens().then(
